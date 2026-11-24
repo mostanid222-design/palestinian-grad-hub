@@ -196,9 +196,9 @@
 <body class="min-h-screen flex flex-col">
 
   <!-- Top Advisory Notice Banner -->
-  <div class="no-print bg-amber-50 border-b border-amber-200 text-amber-950 text-xs py-2 px-4">
+  <div class="no-print bg-slate-100 border-b border-slate-200 text-slate-700 text-xs py-2 px-4">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-2 text-center font-semibold">
-      <span class="inline-flex items-center gap-1 bg-amber-200/80 text-amber-950 px-2 py-0.5 rounded-full font-extrabold">ℹ️ نموذج استرشادي</span>
+      <span class="inline-flex items-center gap-1 bg-emerald-900/10 text-emerald-900 px-2 py-0.5 rounded-full font-extrabold">ℹ️ نموذج استرشادي</span>
       <span data-i18n="advisoryBanner">تنويه أكاديمي: هذه المنصة والنماذج المرفقة بها استرشادية لمساعدة طلبة الدراسات العليا في التنسيق والإعداد؛ يُرجى مراجعة دليل الدراسات العليا المعتمد في جامعتك قبل التسليم النهائي.</span>
     </div>
   </div>
@@ -230,10 +230,10 @@
         <button type="button" id="btn-open-contact" class="bg-slate-800 hover:bg-slate-700 text-white px-2.5 py-1 rounded-md transition" data-i18n="contactBtn">
           صورتي وبياناتي
         </button>
-        <button type="button" id="btn-open-feedback-top" class="inline-flex items-center gap-1 bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold px-2.5 py-1 rounded-md transition" title="أرسل اقتراحاً أو ملاحظة عبر واتساب أو جيميل">
+        <button type="button" id="btn-open-feedback-top" class="inline-flex items-center gap-1 bg-slate-800 hover:bg-slate-700 text-emerald-200 font-bold px-2.5 py-1 rounded-md border border-slate-700 transition" title="أرسل اقتراحاً أو ملاحظة عبر واتساب أو جيميل">
           💬 <span>الاقتراحات والملاحظات</span>
         </button>
-        <button type="button" id="btn-open-guide-top" class="inline-flex items-center gap-1 bg-sky-600 hover:bg-sky-500 text-white font-extrabold px-2.5 py-1 rounded-md transition" title="نموذج استرشادي لكيفية استخدام المنصة خطوة بخطوة">
+        <button type="button" id="btn-open-guide-top" class="inline-flex items-center gap-1 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold px-2.5 py-1 rounded-md border border-slate-700 transition" title="نموذج استرشادي لكيفية استخدام المنصة خطوة بخطوة">
           📖 <span>دليل الاستخدام</span>
         </button>
         <span id="offline-status-pill" class="inline-flex items-center gap-1 bg-emerald-900/80 text-emerald-200 border border-emerald-700/60 px-2 py-1 rounded-md text-[11px] font-bold" title="المنصة تعمل بالكامل بدون إنترنت مع حفظ تلقائي">
@@ -272,18 +272,18 @@
 
         <!-- Quick Export / Clear / Backup Toolbar -->
         <div class="flex flex-wrap items-center gap-1.5">
-          <button type="button" id="btn-quick-ai-top" class="inline-flex items-center gap-1.5 bg-gradient-to-r from-indigo-700 to-purple-700 hover:from-indigo-800 hover:to-purple-800 text-white text-xs font-extrabold px-3 py-2 rounded-lg transition shadow-sm" title="استخدام أدوات الذكاء الاصطناعي الأكاديمية">
-            <svg class="w-4 h-4 text-amber-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l2.1 5.9L20 10l-5.9 2.1L12 18l-2.1-5.9L4 10l5.9-2.1L12 2zm7 12l1.2 3.3L23.5 18.5l-3.3 1.2L19 23l-1.2-3.3-3.3-1.2 3.3-1.2L19 14zM5 14l.9 2.4L8.3 17.3l-2.4.9L5 20.6l-.9-2.4-2.4-.9 2.4-.9L5 14z"/></svg>
+          <button type="button" id="btn-quick-ai-top" class="inline-flex items-center gap-1.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 text-xs font-bold px-3 py-2 rounded-lg transition shadow-sm" title="استخدام أدوات الذكاء الاصطناعي الأكاديمية">
+            <svg class="w-4 h-4 text-emerald-700" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l2.1 5.9L20 10l-5.9 2.1L12 18l-2.1-5.9L4 10l5.9-2.1L12 2zm7 12l1.2 3.3L23.5 18.5l-3.3 1.2L19 23l-1.2-3.3-3.3-1.2 3.3-1.2L19 14zM5 14l.9 2.4L8.3 17.3l-2.4.9L5 20.6l-.9-2.4-2.4-.9 2.4-.9L5 14z"/></svg>
             <span data-i18n="quickAiBtn">أدوات الذكاء الاصطناعي</span>
           </button>
-          <button type="button" id="btn-open-refs-top" class="inline-flex items-center gap-1.5 bg-teal-700 hover:bg-teal-800 text-white text-xs font-extrabold px-3 py-2 rounded-lg transition shadow-sm" title="المراجع والمصادر ومساعدة الباحث في التوثيق">
-            <svg class="w-4 h-4 text-amber-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          <button type="button" id="btn-open-refs-top" class="inline-flex items-center gap-1.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 text-xs font-bold px-3 py-2 rounded-lg transition shadow-sm" title="المراجع والمصادر ومساعدة الباحث في التوثيق">
+            <svg class="w-4 h-4 text-emerald-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
             <span>المراجع والمصادر</span>
           </button>
-          <button type="button" id="btn-export-word" class="inline-flex items-center gap-1 bg-blue-700 hover:bg-blue-800 text-white text-xs font-bold px-3 py-2 rounded-lg transition shadow-sm">
+          <button type="button" id="btn-export-word" class="inline-flex items-center gap-1 bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-bold px-3 py-2 rounded-lg transition shadow-sm">
             <span>📄</span> <span data-i18n="exportWord">تصدير Word</span>
           </button>
-          <button type="button" id="btn-export-pdf" class="inline-flex items-center gap-1 bg-rose-700 hover:bg-rose-800 text-white text-xs font-bold px-3 py-2 rounded-lg transition shadow-sm">
+          <button type="button" id="btn-export-pdf" class="inline-flex items-center gap-1 bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold px-3 py-2 rounded-lg transition shadow-sm">
             <span>🖨️</span> <span data-i18n="exportPdf">تصدير PDF</span>
           </button>
           <button type="button" id="btn-save-json" class="inline-flex items-center gap-1 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold px-2.5 py-2 rounded-lg transition border border-slate-300">
@@ -325,7 +325,7 @@
         <button type="button" data-tab="ai" class="nav-pill whitespace-nowrap px-3 py-2 rounded-lg text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 transition">
           🤖 <span data-i18n="navAi">الذكاء الاصطناعي</span>
         </button>
-        <button type="button" data-tab="solutions" class="nav-pill whitespace-nowrap px-3 py-2 rounded-lg text-xs font-bold text-emerald-900 bg-amber-100 hover:bg-amber-200 border border-amber-300 transition">
+        <button type="button" data-tab="solutions" class="nav-pill whitespace-nowrap px-3 py-2 rounded-lg text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 transition">
           🧭 <span data-i18n="navSolutions">حلول مشاكل الطلبة</span>
         </button>
       </nav>
@@ -334,6 +334,31 @@
 
   <!-- Main Workspace -->
   <main class="no-print flex-1 max-w-7xl w-full mx-auto px-3 sm:px-4 py-4 sm:py-6 space-y-5">
+    <!-- Live Usage Counters Strip (Matches ATS CV Platform Style) -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3" id="usage-stats-strip">
+      <div class="bg-white rounded-2xl px-5 py-3.5 shadow-sm border border-slate-200 flex items-center justify-between gap-3">
+        <div>
+          <p class="text-xs font-bold text-slate-500">المستخدمون والزيارات</p>
+          <p id="cnt-visits" class="text-2xl font-extrabold text-emerald-800 mt-0.5 leading-none">1</p>
+        </div>
+        <span id="usage-sync-badge" class="text-[11px] font-bold px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 whitespace-nowrap">أونلاين / أوفلاين</span>
+      </div>
+      <div class="bg-white rounded-2xl px-5 py-3.5 shadow-sm border border-slate-200 flex items-center justify-between gap-3">
+        <div>
+          <p class="text-xs font-bold text-slate-500">ملفات PDF وWord المصدّرة</p>
+          <p id="cnt-exports" class="text-2xl font-extrabold text-slate-900 mt-0.5 leading-none">0</p>
+        </div>
+        <span class="text-[11px] font-bold px-3 py-1 rounded-full bg-slate-50 text-slate-700 border border-slate-200 whitespace-nowrap">PDF / Word</span>
+      </div>
+      <div class="bg-white rounded-2xl px-5 py-3.5 shadow-sm border border-slate-200 flex items-center justify-between gap-3">
+        <div>
+          <p class="text-xs font-bold text-slate-500">النماذج والرسائل المُعدّة</p>
+          <p id="cnt-templates" class="text-2xl font-extrabold text-slate-900 mt-0.5 leading-none">1</p>
+        </div>
+        <span class="text-[11px] font-bold px-3 py-1 rounded-full bg-slate-50 text-slate-700 border border-slate-200 whitespace-nowrap">رسالة / مناقشة / إحصاء</span>
+      </div>
+    </div>
+
     <!-- Top Live Platform Statistics Strip (Responsive Mobile 2-col / Desktop 5-col) -->
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3" id="top-stats-bar">
       <button type="button" data-stat-tab="universities" class="stat-jump bg-white hover:border-emerald-400 border border-slate-200 rounded-2xl p-3 sm:p-3.5 shadow-sm text-right transition flex items-center gap-2.5">
@@ -364,7 +389,7 @@
           <p class="text-[11px] text-slate-500 font-bold mt-1 truncate">مشكلة وعنوان بحثي</p>
         </div>
       </button>
-      <button type="button" data-stat-tab="ai" class="stat-jump col-span-2 sm:col-span-1 bg-gradient-to-l from-indigo-900 to-emerald-900 text-white rounded-2xl p-3 sm:p-3.5 shadow-sm text-right transition flex items-center gap-2.5">
+      <button type="button" data-stat-tab="ai" class="stat-jump col-span-2 sm:col-span-1 bg-emerald-900 text-white rounded-2xl p-3 sm:p-3.5 shadow-sm text-right transition flex items-center gap-2.5">
         <span class="w-10 h-10 rounded-xl bg-white/15 text-amber-300 flex items-center justify-center text-lg shrink-0">🤖</span>
         <div class="min-w-0">
           <p id="kpi-ai" class="text-lg sm:text-xl font-extrabold text-amber-300 leading-none">10</p>
@@ -1610,7 +1635,7 @@
   </div>
 
   <!-- Floating Suggestions & Feedback Icon -->
-  <button type="button" id="btn-fab-feedback" class="no-print fixed bottom-36 left-5 z-40 inline-flex items-center gap-2 bg-gradient-to-br from-amber-500 to-orange-600 hover:scale-105 text-slate-950 px-3.5 sm:px-4 py-2.5 rounded-full shadow-xl border-2 border-white/80 transition" title="الاقتراحات والملاحظات — واتساب وجيميل">
+  <button type="button" id="btn-fab-feedback" class="no-print fixed bottom-36 left-5 z-40 inline-flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-800 px-3.5 sm:px-4 py-2.5 rounded-full shadow-lg border border-slate-300 transition" title="الاقتراحات والملاحظات — واتساب وجيميل">
     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
     <span class="text-xs font-extrabold hidden sm:inline">الاقتراحات والملاحظات</span>
   </button>
@@ -1669,7 +1694,7 @@
   </div>
 
   <!-- Floating References & Sources Helper Icon -->
-  <button type="button" id="btn-fab-refs" class="no-print fixed bottom-20 left-5 z-40 inline-flex items-center gap-2 bg-gradient-to-br from-teal-700 to-emerald-900 hover:scale-105 text-white px-4 py-2.5 rounded-full shadow-xl border-2 border-amber-300/80 transition" title="المراجع والمصادر ومساعدة الباحث">
+  <button type="button" id="btn-fab-refs" class="no-print fixed bottom-20 left-5 z-40 inline-flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-800 px-3.5 sm:px-4 py-2.5 rounded-full shadow-lg border border-slate-300 transition" title="المراجع والمصادر ومساعدة الباحث">
     <svg class="w-5 h-5 text-amber-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
     <span class="text-xs font-extrabold hidden sm:inline">المراجع والمصادر</span>
   </button>
@@ -1745,7 +1770,7 @@
   </div>
 
   <!-- Floating AI Tools Quick-Access Icon -->
-  <button type="button" id="btn-fab-ai" class="no-print fixed bottom-5 left-5 z-40 inline-flex items-center gap-2 bg-gradient-to-br from-indigo-700 via-purple-700 to-emerald-800 hover:scale-105 text-white px-4 py-3 rounded-full shadow-xl border-2 border-amber-300/80 transition" title="استخدام أدوات الذكاء الاصطناعي للبحث العلمي">
+  <button type="button" id="btn-fab-ai" class="no-print fixed bottom-5 left-5 z-40 inline-flex items-center gap-2 bg-emerald-800 hover:bg-emerald-900 text-white px-3.5 sm:px-4 py-2.5 rounded-full shadow-lg border border-emerald-700 transition" title="استخدام أدوات الذكاء الاصطناعي للبحث العلمي">
     <svg class="w-5 h-5 text-amber-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l2.1 5.9L20 10l-5.9 2.1L12 18l-2.1-5.9L4 10l5.9-2.1L12 2zm7 12l1.2 3.3L23.5 18.5l-3.3 1.2L19 23l-1.2-3.3-3.3-1.2 3.3-1.2L19 14z"/></svg>
     <span class="text-xs font-extrabold hidden sm:inline">استخدام الذكاء الاصطناعي</span>
   </button>
@@ -4428,7 +4453,99 @@ ${document.getElementById('dk-invite-msg').value}
       });
     }
 
-    document.addEventListener('DOMContentLoaded', () => { init(); initSolutionsHub(); initDefenseKit(); initFacultiesDirectory(); initRefsHelper(); initTopStats(); initFeedbackModal(); initPowerExtras(); initGuideAndBankFilter(); initStatsLab(); initV2Tools(); updateOfflineBadge(); });
+
+    // ==================== 18. LIVE OFFLINE USAGE COUNTERS (VISITS, EXPORTS, PREPARED TEMPLATES) ====================
+    function getUsageStats() {
+      let u = { visits: 0, exports: 0, templates: 1 };
+      try {
+        const raw = localStorage.getItem('pal_grad_usage_counters_v1');
+        if (raw) u = Object.assign(u, JSON.parse(raw));
+      } catch (e) {}
+      return u;
+    }
+    function saveUsageStats(u) {
+      try { localStorage.setItem('pal_grad_usage_counters_v1', JSON.stringify(u)); } catch (e) {}
+      const s = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+      s('cnt-visits', u.visits);
+      s('cnt-exports', u.exports);
+      s('cnt-templates', u.templates);
+    }
+    const COUNTER_NS = 'mostafa-pal-grad-hub';
+
+    async function syncCounterOnline(key, hit = true) {
+      if (!navigator.onLine) return null;
+      try {
+        const ep = hit ? 'hit' : 'get';
+        const resp = await fetch(`https://abacus.jasoncameron.dev/${ep}/${COUNTER_NS}/${key}`);
+        if (!resp.ok) return null;
+        const data = await resp.json();
+        if (typeof data.value === 'number') return data.value;
+      } catch (e) {}
+      return null;
+    }
+
+    function setUsageBadge(isOnlineSynced) {
+      const b = document.getElementById('usage-sync-badge');
+      if (!b) return;
+      b.textContent = isOnlineSynced ? '🟢 عداد مباشر (أونلاين + أوفلاين)' : '📴 عداد محلي (أوفلاين)';
+    }
+
+    async function bumpUsageStat(key) {
+      const u = getUsageStats();
+      u[key] = (Number(u[key]) || 0) + 1;
+      saveUsageStats(u);
+      const liveVal = await syncCounterOnline(key, true);
+      if (liveVal !== null) {
+        const cur = getUsageStats();
+        cur[key] = Math.max(cur[key], liveVal);
+        saveUsageStats(cur);
+        setUsageBadge(true);
+      }
+    }
+
+    async function initUsageCounters() {
+      const u = getUsageStats();
+      u.visits = (Number(u.visits) || 0) + 1;
+      saveUsageStats(u);
+      setUsageBadge(false);
+
+      // Try syncing real global counts online (graceful offline fallback)
+      const [liveVisits, liveExports, liveTemplates] = await Promise.all([
+        syncCounterOnline('visits', true),
+        syncCounterOnline('exports', false),
+        syncCounterOnline('templates', false)
+      ]);
+      if (liveVisits !== null || liveExports !== null || liveTemplates !== null) {
+        const cur = getUsageStats();
+        if (liveVisits !== null) cur.visits = Math.max(cur.visits, liveVisits);
+        if (liveExports !== null) cur.exports = Math.max(cur.exports, liveExports);
+        if (liveTemplates !== null) cur.templates = Math.max(cur.templates, liveTemplates);
+        saveUsageStats(cur);
+        setUsageBadge(true);
+      }
+
+      // Wrap exportToWord & window.print to auto-increment exported files counter
+      const _origExportWord = exportToWord;
+      exportToWord = function(htmlContent, fileName) {
+        bumpUsageStat('exports');
+        return _origExportWord(htmlContent, fileName);
+      };
+      const _origPrint = window.print.bind(window);
+      window.print = function() {
+        bumpUsageStat('exports');
+        return _origPrint();
+      };
+      // Increment prepared templates counter when user saves backup or adopts a title/major
+      const saveBtn = document.getElementById('btn-save-json');
+      if (saveBtn) saveBtn.addEventListener('click', () => bumpUsageStat('templates'));
+      document.addEventListener('click', e => {
+        if (e.target && (e.target.closest('.btn-use-bank') || e.target.closest('.btn-apply-major') || e.target.closest('#btn-add-study'))) {
+          bumpUsageStat('templates');
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => { init(); initSolutionsHub(); initDefenseKit(); initFacultiesDirectory(); initRefsHelper(); initTopStats(); initFeedbackModal(); initPowerExtras(); initGuideAndBankFilter(); initStatsLab(); initV2Tools(); initUsageCounters(); updateOfflineBadge(); });
 
     if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').catch(() => {}); }); }
   </script>
