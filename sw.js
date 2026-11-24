@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pal-grad-hub-v1';
+const CACHE_NAME = 'pal-grad-hub-v2';
 const ASSETS = ['./', './index.html', './manifest.json'];
 
 self.addEventListener('install', event => {
@@ -16,12 +16,12 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
   event.respondWith(
-    caches.match(event.request).then(cached => cached || fetch(event.request).then(resp => {
+    fetch(event.request).then(resp => {
       if (resp && resp.status === 200 && resp.type === 'basic') {
         const clone = resp.clone();
         caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
       }
       return resp;
-    }).catch(() => caches.match('./index.html')))
+    }).catch(() => caches.match(event.request).then(cached => cached || caches.match('./index.html')))
   );
 });

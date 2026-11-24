@@ -4547,7 +4547,7 @@ ${document.getElementById('dk-invite-msg').value}
 
     document.addEventListener('DOMContentLoaded', () => { init(); initSolutionsHub(); initDefenseKit(); initFacultiesDirectory(); initRefsHelper(); initTopStats(); initFeedbackModal(); initPowerExtras(); initGuideAndBankFilter(); initStatsLab(); initV2Tools(); initUsageCounters(); updateOfflineBadge(); });
 
-    if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').catch(() => {}); }); }
+    if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js?v=2').then(r => r.update()).catch(() => {}); }); }
   </script>
 </body>
 </html>
