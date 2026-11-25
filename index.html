@@ -4434,19 +4434,29 @@ ${document.getElementById('dk-invite-msg').value}
     function getUsageStats() {
       let u = { visits: 0, exports: 0, templates: 1 };
       try {
-        const raw = localStorage.getItem('pal_grad_usage_counters_v1');
-        if (raw) u = Object.assign(u, JSON.parse(raw));
+        let raw = localStorage.getItem('pal_grad_usage_counters_v2');
+        if (raw) {
+          u = Object.assign(u, JSON.parse(raw));
+        } else {
+          const oldRaw = localStorage.getItem('pal_grad_usage_counters_v1');
+          if (oldRaw) {
+            const old = JSON.parse(oldRaw);
+            u.exports = Number(old.exports) || 0;
+            u.templates = Number(old.templates) || 1;
+          }
+          localStorage.setItem('pal_grad_usage_counters_v2', JSON.stringify(u));
+        }
       } catch (e) {}
       return u;
     }
     function saveUsageStats(u) {
-      try { localStorage.setItem('pal_grad_usage_counters_v1', JSON.stringify(u)); } catch (e) {}
+      try { localStorage.setItem('pal_grad_usage_counters_v2', JSON.stringify(u)); } catch (e) {}
       const s = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
-      s('cnt-visits', u.visits);
+      s('cnt-visits', (2000 + (Number(u.visits) || 0)).toLocaleString('en-US'));
       s('cnt-exports', u.exports);
       s('cnt-templates', u.templates);
     }
-    const COUNTER_NS = 'mostafa-pal-grad-hub';
+    const COUNTER_NS = 'mostafa-pal-grad-hub-v2';
 
     async function syncCounterOnline(key, hit = true) {
       if (!navigator.onLine) return null;
