@@ -2430,62 +2430,7 @@
         <head><meta charset="utf-8"><title>${escapeHtml(fileName)}</title>
         <style>@page { size: A4; margin: 2cm 2.5cm; } .print-page { page-break-after: always; }</style>
         </head><body>${htmlContent}
-  <!-- Welcome / creator card -->
-  <style>
-    #mostafa-welcome-overlay{position:fixed;inset:0;z-index:999999;background:rgba(8,20,30,.78);backdrop-filter:blur(7px);display:none;align-items:center;justify-content:center;padding:18px}
-    #mostafa-welcome-card{width:min(100%,440px);max-height:92vh;overflow:auto;background:linear-gradient(145deg,#fff 0%,#f0fdfa 100%);border:1px solid rgba(255,255,255,.7);border-radius:26px;box-shadow:0 24px 80px rgba(0,0,0,.35);padding:26px 22px;text-align:center;color:#17352f;font-family:inherit;position:relative}
-    #mostafa-welcome-card .mw-photo{width:104px;height:104px;border-radius:50%;object-fit:cover;object-position:top;border:4px solid #d6a642;box-shadow:0 5px 18px #0f766e33;margin:0 auto 13px;display:block;background:#e2e8f0}
-    #mostafa-welcome-card .mw-name{font-size:21px;font-weight:900;margin:0 0 5px}
-    #mostafa-welcome-card .mw-sub{font-size:13px;color:#52716a;margin:0 0 17px}
-    #mostafa-welcome-card .mw-message{font-size:14px;line-height:1.9;background:#fff;border:1px solid #d9eee8;border-radius:16px;padding:14px;margin:0 0 16px}
-    #mostafa-welcome-card .mw-prayer{font-size:14px;line-height:1.9;color:#8a5a12;font-weight:800;margin:12px 0 18px}
-    #mostafa-welcome-card .mw-links{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:18px}
-    #mostafa-welcome-card .mw-links a{font-size:12px;font-weight:800;text-decoration:none;border:1px solid #cbded8;border-radius:999px;padding:7px 11px;color:#14594c;background:#fff}
-    #mostafa-welcome-card .mw-enter{width:100%;border:0;border-radius:13px;padding:13px 18px;background:#116b59;color:#fff;font-weight:900;font-size:15px;cursor:pointer}
-    #mostafa-welcome-card .mw-enter:hover{background:#0b5144}
-    @media(max-width:420px){#mostafa-welcome-card{padding:22px 16px}#mostafa-welcome-card .mw-name{font-size:19px}}
-  </style>
-  <div id="mostafa-welcome-overlay" role="dialog" aria-modal="true" aria-label="رسالة ترحيبية من مطوّر المنصة">
-    <div id="mostafa-welcome-card" dir="rtl">
-      <img class="mw-photo" id="mostafa-welcome-photo" alt="صورة مصطفى الشافعي" />
-      <h2 class="mw-name">مصطفى نضال مصطفى الشافعي</h2>
-      <p class="mw-sub">إعداد وتطوير منصات رقمية لخدمة الطلبة والباحثين</p>
-      <p class="mw-message">أهلًا وسهلًا بك في منصة الباحث الفلسطيني للدراسات العليا.<br>أعددت هذه المنصة لتكون مساحة نافعة، وأتمنى أن تجد فيها ما يساعدك ويختصر عليك الطريق. شكرًا لزيارتك وثقتك.</p>
-      <p class="mw-prayer">لا تنسونا من دعوة صادقة بظهر الغيب؛ فربّ دعوةٍ طيبة تفتح بابًا من الخير لا نحتسبه. 🤍</p>
-      <div class="mw-links">
-        <a href="mailto:mostafa.n.shafie@gmail.com">البريد الإلكتروني</a>
-        <a href="https://www.linkedin.com/in/mostafa-alshafie-545558231/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://www.instagram.com/mostafa.n.alshafie/" target="_blank" rel="noopener noreferrer">Instagram</a>
-      </div>
-      <button class="mw-enter" id="mostafa-welcome-enter" type="button">دخول إلى المنصة ←</button>
-    </div>
-  </div>
-  <script>
-    (function(){
-      function showMostafaWelcome(){
-        var overlay=document.getElementById('mostafa-welcome-overlay');
-        var photo=document.getElementById('mostafa-welcome-photo');
-        if(!overlay||!photo)return;
-        var existingPhoto=(typeof state!=='undefined' && state.creatorPhoto) || (document.querySelector('#header-avatar-slot img') && document.querySelector('#header-avatar-slot img').src);
-        if(existingPhoto){photo.src=existingPhoto;}
-        else{photo.style.display='none';}
-        var alreadyShown=false;
-        try{alreadyShown=sessionStorage.getItem('mostafa_grad_welcome_v1')==='1';}catch(e){}
-        if(!alreadyShown){
-          overlay.style.display='flex';
-          document.body.style.overflow='hidden';
-        }
-        function closeWelcome(){
-          overlay.style.display='none';
-          document.body.style.overflow='';
-          try{sessionStorage.setItem('mostafa_grad_welcome_v1','1');}catch(e){}
-        }
-        document.getElementById('mostafa-welcome-enter').addEventListener('click',closeWelcome);
-      }
-      if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',showMostafaWelcome);}
-      else{showMostafaWelcome();}
-    })();
-  </script>
+
 </body></html>`;
       const blob = new Blob(['\ufeff', docHtml], { type: 'application/msword;charset=utf-8' });
       const url = URL.createObjectURL(blob);
@@ -4592,5 +4537,60 @@ ${document.getElementById('dk-invite-msg').value}
 
     if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js?v=3').then(r => r.update()).catch(() => {}); }); }
   </script>
+
+  <!-- Welcome / creator card (live page) -->
+  <style>
+    #mostafa-welcome-overlay{position:fixed;inset:0;z-index:2147483000;background:rgba(8,20,30,.82);backdrop-filter:blur(7px);display:none;align-items:center;justify-content:center;padding:16px}
+    #mostafa-welcome-card{box-sizing:border-box;width:min(100%,440px);max-height:92vh;overflow:auto;background:linear-gradient(145deg,#fff 0%,#f0fdfa 100%);border:1px solid rgba(255,255,255,.7);border-radius:24px;box-shadow:0 24px 80px rgba(0,0,0,.4);padding:24px 20px;text-align:center;color:#17352f;font-family:inherit;position:relative}
+    #mostafa-welcome-card .mw-photo{width:112px;height:112px;border-radius:50%;object-fit:cover;object-position:top;border:4px solid #d6a642;box-shadow:0 5px 18px #0f766e33;margin:0 auto 13px;display:block;background:#e2e8f0}
+    #mostafa-welcome-card .mw-close{position:absolute;top:9px;left:12px;border:0;background:#e8f1ee;color:#23443d;border-radius:50%;width:34px;height:34px;font-size:22px;cursor:pointer}
+    #mostafa-welcome-card .mw-name{font-size:21px;font-weight:900;margin:0 0 5px}
+    #mostafa-welcome-card .mw-sub{font-size:13px;color:#52716a;margin:0 0 15px}
+    #mostafa-welcome-card .mw-message{font-size:14px;line-height:1.9;background:#fff;border:1px solid #d9eee8;border-radius:15px;padding:13px;margin:0 0 13px}
+    #mostafa-welcome-card .mw-prayer{font-size:14px;line-height:1.9;color:#8a5a12;font-weight:800;margin:12px 0 16px}
+    #mostafa-welcome-card .mw-links{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:16px}
+    #mostafa-welcome-card .mw-links a{font-size:12px;font-weight:800;text-decoration:none;border:1px solid #cbded8;border-radius:999px;padding:7px 11px;color:#14594c;background:#fff}
+    #mostafa-welcome-card .mw-enter{width:100%;border:0;border-radius:13px;padding:13px 18px;background:#116b59;color:#fff;font-weight:900;font-size:15px;cursor:pointer}
+    @media(max-width:420px){#mostafa-welcome-card{padding:22px 16px}#mostafa-welcome-card .mw-name{font-size:19px}}
+  </style>
+  <div id="mostafa-welcome-overlay" role="dialog" aria-modal="true" aria-label="رسالة ترحيبية من مطوّر المنصة">
+    <div id="mostafa-welcome-card" dir="rtl">
+      <button class="mw-close" id="mostafa-welcome-close" type="button" aria-label="إغلاق">×</button>
+      <img class="mw-photo" src="data:image/jpeg;base64,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" alt="صورة مصطفى الشافعي" />
+      <h2 class="mw-name">مصطفى نضال مصطفى الشافعي</h2>
+      <p class="mw-sub">إعداد وتطوير منصات رقمية لخدمة الطلبة والباحثين</p>
+      <p class="mw-message">أهلًا وسهلًا بك في منصة الباحث الفلسطيني للدراسات العليا. أعددت هذه المنصة لتكون مساحة نافعة، وأتمنى أن تجد فيها ما يساعدك ويختصر عليك الطريق. شكرًا لزيارتك وثقتك.</p>
+      <p class="mw-prayer">لا تنسونا من دعوة صادقة بظهر الغيب؛ فربّ دعوةٍ طيبة تفتح بابًا من الخير لا نحتسبه. 🤍</p>
+      <div class="mw-links">
+        <a href="mailto:mostafa.n.shafie@gmail.com">البريد الإلكتروني</a>
+        <a href="https://www.linkedin.com/in/mostafa-alshafie-545558231/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://www.instagram.com/mostafa.n.alshafie/" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </div>
+      <button class="mw-enter" id="mostafa-welcome-enter" type="button">دخول إلى المنصة ←</button>
+    </div>
+  </div>
+  <script>
+    (function(){
+      function initMostafaWelcome(){
+        var overlay=document.getElementById('mostafa-welcome-overlay');
+        if(!overlay)return;
+        var key='mostafa_welcome_live_v2_grad';
+        var shown=false;
+        try{shown=sessionStorage.getItem(key)==='1';}catch(e){}
+        if(!shown){overlay.style.display='flex';document.body.style.overflow='hidden';}
+        function close(){
+          overlay.style.display='none';
+          document.body.style.overflow='';
+          try{sessionStorage.setItem(key,'1');}catch(e){}
+        }
+        document.getElementById('mostafa-welcome-enter').addEventListener('click',close);
+        document.getElementById('mostafa-welcome-close').addEventListener('click',close);
+        overlay.addEventListener('click',function(e){if(e.target===overlay)close();});
+      }
+      if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initMostafaWelcome);
+      else initMostafaWelcome();
+    })();
+  </script>
+
 </body>
 </html>
