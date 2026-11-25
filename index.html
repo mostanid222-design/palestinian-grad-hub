@@ -2273,7 +2273,7 @@
     }
 
     // ==================== 5. DEFENSE SLIDES & CERTIFICATES RENDERERS ====================
-    function renderPreview(){renderPreviewBase();const host=document.getElementById('a4-preview-host');if(host&&host.firstElementChild){const d=getDesignSettings();host.firstElementChild.style.borderColor=d.primary;host.firstElementChild.style.borderStyle=d.layout==='minimal'?'solid':'double';host.firstElementChild.style.borderWidth=d.layout==='minimal'?'1px':d.layout==='ornate'?'8px':'3px';host.firstElementChild.style.background=d.background;}}
+    function renderPreview(){renderPreviewBase();const host=document.getElementById('a4-preview-host');if(host&&host.firstElementChild){const d=getDesignSettings();const w=d.orientation==='landscape'?Math.max(d.width,d.height):Math.min(d.width,d.height),h=d.orientation==='landscape'?Math.min(d.width,d.height):Math.max(d.width,d.height);host.firstElementChild.style.borderColor=d.primary;host.firstElementChild.style.borderStyle=d.layout==='minimal'?'solid':'double';host.firstElementChild.style.borderWidth=d.layout==='minimal'?'1px':d.layout==='ornate'?'8px':'3px';host.firstElementChild.style.background=d.background;host.firstElementChild.style.width=w+d.unit;host.firstElementChild.style.minHeight=h+d.unit;host.firstElementChild.style.maxWidth='100%';host.firstElementChild.style.boxSizing='border-box';}}
 
     function renderDefenseSlides() {
       const uni = getCurrentUni();
