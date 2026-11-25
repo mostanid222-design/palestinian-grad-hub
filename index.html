@@ -3719,12 +3719,14 @@ ${term}`, 'تم نسخ أمر الترجمة العلمية والتبسيط �
       });
 
       document.getElementById('btn-print-kit').addEventListener('click', () => {
-        const htmlOut = activeKitMode === 'banner' ? buildDefenseBannerHTML() : (activeKitMode === 'tents' ? buildTableTentsHTML() : buildInvitationCardHTML());
+        const rawOut = activeKitMode === 'banner' ? buildDefenseBannerHTML() : (activeKitMode === 'tents' ? buildTableTentsHTML() : buildInvitationCardHTML());
+        const htmlOut = applyDesignToHTML(rawOut, activeKitMode);
         document.getElementById('print-export-area').innerHTML = `<div class="print-page">${htmlOut}</div>`;
         window.print();
       });
       document.getElementById('btn-word-kit').addEventListener('click', () => {
-        const htmlOut = activeKitMode === 'banner' ? buildDefenseBannerHTML() : (activeKitMode === 'tents' ? buildTableTentsHTML() : buildInvitationCardHTML());
+        const rawOut = activeKitMode === 'banner' ? buildDefenseBannerHTML() : (activeKitMode === 'tents' ? buildTableTentsHTML() : buildInvitationCardHTML());
+        const htmlOut = applyDesignToHTML(rawOut, activeKitMode);
         const names = { banner: 'Defense_Banner.doc', tents: 'Defense_Table_Name_Cards.doc', invite: 'Defense_Invitation_Card.doc' };
         exportToWord(htmlOut, names[activeKitMode] || 'Defense_Kit.doc');
       });
