@@ -2429,7 +2429,64 @@
       const docHtml = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
         <head><meta charset="utf-8"><title>${escapeHtml(fileName)}</title>
         <style>@page { size: A4; margin: 2cm 2.5cm; } .print-page { page-break-after: always; }</style>
-        </head><body>${htmlContent}</body></html>`;
+        </head><body>${htmlContent}
+  <!-- Welcome / creator card -->
+  <style>
+    #mostafa-welcome-overlay{position:fixed;inset:0;z-index:999999;background:rgba(8,20,30,.78);backdrop-filter:blur(7px);display:none;align-items:center;justify-content:center;padding:18px}
+    #mostafa-welcome-card{width:min(100%,440px);max-height:92vh;overflow:auto;background:linear-gradient(145deg,#fff 0%,#f0fdfa 100%);border:1px solid rgba(255,255,255,.7);border-radius:26px;box-shadow:0 24px 80px rgba(0,0,0,.35);padding:26px 22px;text-align:center;color:#17352f;font-family:inherit;position:relative}
+    #mostafa-welcome-card .mw-photo{width:104px;height:104px;border-radius:50%;object-fit:cover;object-position:top;border:4px solid #d6a642;box-shadow:0 5px 18px #0f766e33;margin:0 auto 13px;display:block;background:#e2e8f0}
+    #mostafa-welcome-card .mw-name{font-size:21px;font-weight:900;margin:0 0 5px}
+    #mostafa-welcome-card .mw-sub{font-size:13px;color:#52716a;margin:0 0 17px}
+    #mostafa-welcome-card .mw-message{font-size:14px;line-height:1.9;background:#fff;border:1px solid #d9eee8;border-radius:16px;padding:14px;margin:0 0 16px}
+    #mostafa-welcome-card .mw-prayer{font-size:14px;line-height:1.9;color:#8a5a12;font-weight:800;margin:12px 0 18px}
+    #mostafa-welcome-card .mw-links{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:18px}
+    #mostafa-welcome-card .mw-links a{font-size:12px;font-weight:800;text-decoration:none;border:1px solid #cbded8;border-radius:999px;padding:7px 11px;color:#14594c;background:#fff}
+    #mostafa-welcome-card .mw-enter{width:100%;border:0;border-radius:13px;padding:13px 18px;background:#116b59;color:#fff;font-weight:900;font-size:15px;cursor:pointer}
+    #mostafa-welcome-card .mw-enter:hover{background:#0b5144}
+    @media(max-width:420px){#mostafa-welcome-card{padding:22px 16px}#mostafa-welcome-card .mw-name{font-size:19px}}
+  </style>
+  <div id="mostafa-welcome-overlay" role="dialog" aria-modal="true" aria-label="رسالة ترحيبية من مطوّر المنصة">
+    <div id="mostafa-welcome-card" dir="rtl">
+      <img class="mw-photo" id="mostafa-welcome-photo" alt="صورة مصطفى الشافعي" />
+      <h2 class="mw-name">مصطفى نضال مصطفى الشافعي</h2>
+      <p class="mw-sub">إعداد وتطوير منصات رقمية لخدمة الطلبة والباحثين</p>
+      <p class="mw-message">أهلًا وسهلًا بك في منصة الباحث الفلسطيني للدراسات العليا.<br>أعددت هذه المنصة لتكون مساحة نافعة، وأتمنى أن تجد فيها ما يساعدك ويختصر عليك الطريق. شكرًا لزيارتك وثقتك.</p>
+      <p class="mw-prayer">لا تنسونا من دعوة صادقة بظهر الغيب؛ فربّ دعوةٍ طيبة تفتح بابًا من الخير لا نحتسبه. 🤍</p>
+      <div class="mw-links">
+        <a href="mailto:mostafa.n.shafie@gmail.com">البريد الإلكتروني</a>
+        <a href="https://www.linkedin.com/in/mostafa-alshafie-545558231/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://www.instagram.com/mostafa.n.alshafie/" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </div>
+      <button class="mw-enter" id="mostafa-welcome-enter" type="button">دخول إلى المنصة ←</button>
+    </div>
+  </div>
+  <script>
+    (function(){
+      function showMostafaWelcome(){
+        var overlay=document.getElementById('mostafa-welcome-overlay');
+        var photo=document.getElementById('mostafa-welcome-photo');
+        if(!overlay||!photo)return;
+        var existingPhoto=(typeof state!=='undefined' && state.creatorPhoto) || (document.querySelector('#header-avatar-slot img') && document.querySelector('#header-avatar-slot img').src);
+        if(existingPhoto){photo.src=existingPhoto;}
+        else{photo.style.display='none';}
+        var alreadyShown=false;
+        try{alreadyShown=sessionStorage.getItem('mostafa_grad_welcome_v1')==='1';}catch(e){}
+        if(!alreadyShown){
+          overlay.style.display='flex';
+          document.body.style.overflow='hidden';
+        }
+        function closeWelcome(){
+          overlay.style.display='none';
+          document.body.style.overflow='';
+          try{sessionStorage.setItem('mostafa_grad_welcome_v1','1');}catch(e){}
+        }
+        document.getElementById('mostafa-welcome-enter').addEventListener('click',closeWelcome);
+      }
+      if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',showMostafaWelcome);}
+      else{showMostafaWelcome();}
+    })();
+  </script>
+</body></html>`;
       const blob = new Blob(['\ufeff', docHtml], { type: 'application/msword;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
