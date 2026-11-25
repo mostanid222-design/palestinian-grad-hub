@@ -912,7 +912,20 @@
         </div>
       </div>
 
-      <!-- KIT VIEW 1: CERTIFICATES (Existing) -->
+      <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 space-y-3 mb-4" id="design-customizer">
+<h3 class="font-extrabold text-slate-900 text-sm">🎨 استوديو تخصيص التصاميم والمطبوعات</h3><p class="text-[11px] text-slate-500">للشهادات والأغلفة والدعوات والبافطات وبطاقات الطاولة.</p>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+<label class="text-[11px] font-bold">نمط التصميم<select id="design-layout" class="w-full border rounded p-2 text-xs"><option value="classic">كلاسيكي رسمي</option><option value="modern">عصري</option><option value="minimal">بسيط</option><option value="ornate">زخرفي</option><option value="geometric">هندسي</option></select></label>
+<label class="text-[11px] font-bold">المقاس<select id="design-preset" class="w-full border rounded p-2 text-xs"><option value="a4">A4</option><option value="a3">A3</option><option value="a5">A5</option><option value="letter">Letter</option><option value="square">مربع 20×20 سم</option><option value="social">منشور 1080×1080 px</option><option value="story">قصة 1080×1920 px</option><option value="banner">بافطة 200×100 سم</option><option value="custom">مخصص</option></select></label>
+<label class="text-[11px] font-bold">الاتجاه<select id="design-orientation" class="w-full border rounded p-2 text-xs"><option value="portrait">طولي</option><option value="landscape">عرضي</option></select></label>
+<label class="text-[11px] font-bold">العرض<input id="design-width" type="number" min="1" max="5000" value="21" class="w-full border rounded p-2 text-xs"></label>
+<label class="text-[11px] font-bold">الارتفاع<input id="design-height" type="number" min="1" max="5000" value="29.7" class="w-full border rounded p-2 text-xs"></label>
+<label class="text-[11px] font-bold">الوحدة<select id="design-unit" class="w-full border rounded p-2 text-xs"><option value="cm">سم</option><option value="mm">مم</option><option value="in">بوصة</option><option value="px">بكسل</option></select></label></div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 border-t pt-3"><div><p class="text-xs font-bold mb-2">نظام الألوان</p><label class="text-xs ml-3"><input type="radio" name="design-color-mode" value="RGB" checked> RGB</label><label class="text-xs"><input type="radio" name="design-color-mode" value="CMYK"> CMYK</label>
+<div id="design-rgb-fields" class="grid grid-cols-3 gap-2 mt-2"><label class="text-[10px]">أساسي<input id="design-primary" type="color" value="#0f4c3a" class="block w-full h-9"></label><label class="text-[10px]">تمييز<input id="design-accent" type="color" value="#b8860b" class="block w-full h-9"></label><label class="text-[10px]">خلفية<input id="design-background" type="color" value="#fffdf7" class="block w-full h-9"></label></div>
+<div id="design-cmyk-fields" class="hidden grid grid-cols-4 gap-1 mt-2"><label class="text-[10px]">C%<input id="design-c" type="number" min="0" max="100" value="70" class="w-full border rounded p-1"></label><label class="text-[10px]">M%<input id="design-m" type="number" min="0" max="100" value="0" class="w-full border rounded p-1"></label><label class="text-[10px]">Y%<input id="design-y" type="number" min="0" max="100" value="45" class="w-full border rounded p-1"></label><label class="text-[10px]">K%<input id="design-k" type="number" min="0" max="100" value="70" class="w-full border rounded p-1"></label></div></div>
+<div><p class="text-xs font-bold mb-2">معاينة</p><div id="design-swatch-preview" class="rounded-xl border p-4 text-center text-xs font-bold">ألوان التصميم</div><p id="design-size-summary" class="text-[10px] text-slate-500 mt-2"></p></div></div>
+<p class="text-[10px] text-amber-800 bg-amber-50 border border-amber-200 rounded-lg p-2">CMYK للمعاينة: تتحول القيم إلى RGB على الشاشة. ملفات Word والطباعة من المتصفح لا تصبح CMYK حقيقياً دون تحويل طباعي بملف ICC.</p></div>      <!-- KIT VIEW 1: CERTIFICATES (Existing) -->
       <div id="kit-view-cert" class="kit-view grid grid-cols-1 xl:grid-cols-12 gap-6">
         <div class="xl:col-span-4 bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-3 h-fit">
           <h2 class="font-extrabold text-slate-900 text-base border-b border-slate-100 pb-2">نموذج شهادات الشكر والتقدير للمناقشين</h2>
@@ -2090,7 +2103,7 @@
     }
 
     // ==================== 4. RENDER A4 PREVIEW ====================
-    function renderPreview() {
+    function renderPreviewBase() {
       const uni = getCurrentUni();
       const labels = getDocTypeLabels(state.docType);
       const host = document.getElementById('a4-preview-host');
@@ -2260,6 +2273,8 @@
     }
 
     // ==================== 5. DEFENSE SLIDES & CERTIFICATES RENDERERS ====================
+    function renderPreview(){renderPreviewBase();const host=document.getElementById('a4-preview-host');if(host&&host.firstElementChild){const d=getDesignSettings();host.firstElementChild.style.borderColor=d.primary;host.firstElementChild.style.borderStyle=d.layout==='minimal'?'solid':'double';host.firstElementChild.style.borderWidth=d.layout==='minimal'?'1px':d.layout==='ornate'?'8px':'3px';host.firstElementChild.style.background=d.background;}}
+
     function renderDefenseSlides() {
       const uni = getCurrentUni();
       const nav = document.getElementById('slides-nav-list');
@@ -2319,7 +2334,14 @@
       }
     };
 
-    function buildCertificateHTML() {
+
+function designCMYKtoRGB(c,m,y,k){c=Math.max(0,Math.min(100,+c||0))/100;m=Math.max(0,Math.min(100,+m||0))/100;y=Math.max(0,Math.min(100,+y||0))/100;k=Math.max(0,Math.min(100,+k||0))/100;const v=n=>Math.round(255*(1-n)*(1-k)).toString(16).padStart(2,'0');return '#'+v(c)+v(m)+v(y);}
+function getDesignSettings(){const mode=document.querySelector('input[name="design-color-mode"]:checked')?.value||'RGB';const primary=mode==='CMYK'?designCMYKtoRGB(...['c','m','y','k'].map(id=>document.getElementById('design-'+id)?.value)):document.getElementById('design-primary')?.value||'#0f4c3a';const accent=document.getElementById('design-accent')?.value||'#b8860b',background=document.getElementById('design-background')?.value||'#fffdf7';const width=Math.max(1,+document.getElementById('design-width')?.value||21),height=Math.max(1,+document.getElementById('design-height')?.value||29.7),unit=document.getElementById('design-unit')?.value||'cm',orientation=document.getElementById('design-orientation')?.value||'portrait',layout=document.getElementById('design-layout')?.value||'classic';const border=layout==='minimal'?'1px solid '+accent:layout==='ornate'?'8px double '+accent:layout==='geometric'?'4px solid '+primary:'5px double '+accent;return{mode,primary,accent,background,width,height,unit,orientation,layout,border};}
+function applyDesignToHTML(html,kind){const d=getDesignSettings();if(kind==='certificate'){html=html.replace('border:6px double ${uni.color};','border:'+d.border+';').replace('border:6px double #b8860b;','border:'+d.border+';').replace('background:linear-gradient(135deg,#f8fdfb 0%,#ffffff 60%,#fffbeb 100%);','background:'+d.background+';').replace('background:#fffdf8;','background:'+d.background+';');}if(kind==='banner'){html=html.replace('border:5px double #f59e0b;','border:'+d.border+';').replace('background:linear-gradient(135deg,#072c21 0%,${uni.color} 55%,#0f172a 100%);','background:linear-gradient(135deg,'+d.primary+','+d.background+');');}if(kind==='invite'){html=html.replace('border:6px double #b8860b;','border:'+d.border+';').replace('background:linear-gradient(160deg,#ffffff 0%,#f0fdf4 55%,#fffbeb 100%);','background:'+d.background+';');}if(kind==='tents')html=html.replaceAll('border:4px double ${c.badge};','border:'+d.border+';');if(kind!=='tents'){const w=d.orientation==='landscape'?Math.max(d.width,d.height):Math.min(d.width,d.height),h=d.orientation==='landscape'?Math.min(d.width,d.height):Math.max(d.width,d.height);html=html.replace('<div dir="rtl" style="font-family:','<div dir="rtl" style="width:'+w+d.unit+';min-height:'+h+d.unit+';max-width:100%;box-sizing:border-box;font-family:');}return html;}
+function refreshDesignCustomizer(){const d=getDesignSettings(),sw=document.getElementById('design-swatch-preview');if(sw){sw.style.background=d.background;sw.style.color=d.primary;sw.style.borderColor=d.accent;sw.textContent=d.mode+' • '+d.layout;}const sm=document.getElementById('design-size-summary');if(sm)sm.textContent=(d.orientation==='landscape'?'عرضي':'طولي')+' — '+d.width+' × '+d.height+' '+d.unit+' — '+d.mode;document.getElementById('design-rgb-fields')?.classList.toggle('hidden',d.mode!=='RGB');document.getElementById('design-cmyk-fields')?.classList.toggle('hidden',d.mode!=='CMYK');renderCertificatePreview();if(typeof renderDefenseKitEvent==='function')renderDefenseKitEvent();if(typeof renderPreview==='function')renderPreview();}
+function initDesignCustomizer(){const presets={a4:[21,29.7,'cm'],a3:[29.7,42,'cm'],a5:[14.8,21,'cm'],letter:[8.5,11,'in'],square:[20,20,'cm'],social:[1080,1080,'px'],story:[1080,1920,'px'],banner:[200,100,'cm']};document.getElementById('design-preset')?.addEventListener('change',e=>{const p=presets[e.target.value];if(p){document.getElementById('design-width').value=p[0];document.getElementById('design-height').value=p[1];document.getElementById('design-unit').value=p[2];document.getElementById('design-orientation').value=p[0]>p[1]?'landscape':'portrait';}refreshDesignCustomizer();});['design-layout','design-orientation','design-unit','design-width','design-height','design-primary','design-accent','design-background','design-c','design-m','design-y','design-k'].forEach(id=>{const el=document.getElementById(id);el?.addEventListener(el.type==='number'||el.type==='color'?'input':'change',refreshDesignCustomizer);});document.querySelectorAll('input[name="design-color-mode"]').forEach(el=>el.addEventListener('change',refreshDesignCustomizer));refreshDesignCustomizer();}
+
+    function buildCertificateHTMLBase() {
       const uni = getCurrentUni();
       const role = document.getElementById('cert-role').value;
       const member = document.getElementById('cert-member').value;
@@ -2373,6 +2395,7 @@
         </div>`;
     }
 
+    function buildCertificateHTML(){return applyDesignToHTML(buildCertificateHTMLBase(),'certificate');}
     function renderCertificatePreview() {
       document.getElementById('cert-preview-host').innerHTML = buildCertificateHTML();
     }
@@ -3654,9 +3677,9 @@ ${term}`, 'تم نسخ أمر الترجمة العلمية والتبسيط �
     function renderDefenseKitEvent() {
       const host = document.getElementById('kit-event-preview');
       if (!host) return;
-      if (activeKitMode === 'banner') host.innerHTML = buildDefenseBannerHTML();
-      else if (activeKitMode === 'tents') host.innerHTML = buildTableTentsHTML();
-      else if (activeKitMode === 'invite') host.innerHTML = buildInvitationCardHTML();
+      if (activeKitMode === 'banner') host.innerHTML = applyDesignToHTML(buildDefenseBannerHTML(),'banner');
+      else if (activeKitMode === 'tents') host.innerHTML = applyDesignToHTML(buildTableTentsHTML(),'tents');
+      else if (activeKitMode === 'invite') host.innerHTML = applyDesignToHTML(buildInvitationCardHTML(),'invite');
     }
 
     function initDefenseKit() {
@@ -4611,7 +4634,7 @@ ${document.getElementById('dk-invite-msg').value}
       });
     }
 
-    document.addEventListener('DOMContentLoaded', () => { init(); initSolutionsHub(); initDefenseKit(); initFacultiesDirectory(); initRefsHelper(); initTopStats(); initFeedbackModal(); initPowerExtras(); initGuideAndBankFilter(); initStatsLab(); initV2Tools(); initUsageCounters(); updateOfflineBadge(); });
+    document.addEventListener('DOMContentLoaded', () => { init(); initSolutionsHub(); initDesignCustomizer(); initDefenseKit(); initFacultiesDirectory(); initRefsHelper(); initTopStats(); initFeedbackModal(); initPowerExtras(); initGuideAndBankFilter(); initStatsLab(); initV2Tools(); initUsageCounters(); updateOfflineBadge(); });
 
     if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js?v=3').then(r => r.update()).catch(() => {}); }); }
   </script>
