@@ -1598,11 +1598,7 @@
 
       <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 flex items-center justify-between gap-2 text-xs">
         <span class="text-emerald-950 font-bold">إضافة / تحديث صورتك الشخصية:</span>
-        <div class="flex items-center gap-2">
-          <label class="bg-emerald-800 hover:bg-emerald-900 text-white px-3 py-1.5 rounded-lg font-bold cursor-pointer">
-            📷 اختيار صورة
-            <input type="file" id="input-creator-photo" accept="image/*" class="hidden" />
-          </label>
+        <div class="flex items-center">
           <button type="button" id="btn-remove-photo" class="text-rose-700 hover:underline font-semibold">حذف</button>
         </div>
       </div>
@@ -2973,15 +2969,6 @@
         showToast('تمت استعادة الشعار الرسمي للجامعة');
       });
 
-      // Creator Photo Upload
-      document.getElementById('input-creator-photo').addEventListener('change', e => {
-        readImageAsDataURL(e.target.files[0], dataUrl => {
-          state.creatorPhoto = dataUrl;
-          saveState();
-          renderCreatorAvatars();
-          showToast('تم حفظ صورتك الشخصية في المنصة ✅');
-        });
-      });
       document.getElementById('btn-remove-photo').addEventListener('click', () => {
         state.creatorPhoto = '';
         saveState();
