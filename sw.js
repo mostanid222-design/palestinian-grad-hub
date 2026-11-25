@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pal-grad-hub-v2';
+const CACHE_NAME = 'pal-grad-hub-v3';
 const ASSETS = ['./', './index.html', './manifest.json'];
 
 self.addEventListener('install', event => {
