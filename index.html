@@ -1596,12 +1596,7 @@
         </div>
       </div>
 
-      <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 flex items-center justify-between gap-2 text-xs">
-        <span class="text-emerald-950 font-bold">إضافة / تحديث صورتك الشخصية:</span>
-        <div class="flex items-center">
-          <button type="button" id="btn-remove-photo" class="text-rose-700 hover:underline font-semibold">حذف</button>
-        </div>
-      </div>
+      <p class="text-center text-sm font-bold text-emerald-800 py-2">بالصبر والمثابرة تتحوّل الأحلام إلى إنجازات، والخطوات الصغيرة تصنع نجاحًا كبيرًا.</p>
 
       <div class="space-y-2 text-xs bg-slate-50 p-4 rounded-xl border border-slate-200">
         <div class="flex justify-between"><span class="text-slate-500">الموقع:</span><span class="font-bold text-slate-800">دير البلح، قطاع غزة، فلسطين 🇵🇸</span></div>
@@ -2969,12 +2964,6 @@
         showToast('تمت استعادة الشعار الرسمي للجامعة');
       });
 
-      document.getElementById('btn-remove-photo').addEventListener('click', () => {
-        state.creatorPhoto = '';
-        saveState();
-        renderCreatorAvatars();
-        showToast('تمت إزالة الصورة الشخصية');
-      });
       document.getElementById('header-avatar-slot').addEventListener('click', () => {
         const modal = document.getElementById('contact-modal');
         modal.classList.remove('hidden'); modal.classList.add('flex');
@@ -4534,7 +4523,7 @@ ${document.getElementById('dk-invite-msg').value}
 
     document.addEventListener('DOMContentLoaded', () => { init(); initSolutionsHub(); initDefenseKit(); initFacultiesDirectory(); initRefsHelper(); initTopStats(); initFeedbackModal(); initPowerExtras(); initGuideAndBankFilter(); initStatsLab(); initV2Tools(); initUsageCounters(); updateOfflineBadge(); });
 
-    if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js?v=2').then(r => r.update()).catch(() => {}); }); }
+    if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js?v=3').then(r => r.update()).catch(() => {}); }); }
   </script>
 </body>
 </html>
