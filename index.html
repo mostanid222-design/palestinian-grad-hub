@@ -345,7 +345,7 @@
       </div>
       <div class="bg-white rounded-2xl px-5 py-3.5 shadow-sm border border-slate-200 flex items-center justify-between gap-3">
         <div>
-          <p class="text-xs font-bold text-slate-500">ملفات PDF وWord المصدّرة</p>
+          <p class="text-xs font-bold text-slate-500">طلبات تصدير PDF وWord</p>
           <p id="cnt-exports" class="text-2xl font-extrabold text-slate-900 mt-0.5 leading-none">0</p>
         </div>
         <span class="text-[11px] font-bold px-3 py-1 rounded-full bg-slate-50 text-slate-700 border border-slate-200 whitespace-nowrap">PDF / Word</span>
@@ -353,7 +353,7 @@
       <div class="bg-white rounded-2xl px-5 py-3.5 shadow-sm border border-slate-200 flex items-center justify-between gap-3">
         <div>
           <p class="text-xs font-bold text-slate-500">النماذج والرسائل المُعدّة</p>
-          <p id="cnt-templates" class="text-2xl font-extrabold text-slate-900 mt-0.5 leading-none">1</p>
+          <p id="cnt-templates" class="text-2xl font-extrabold text-slate-900 mt-0.5 leading-none">0</p>
         </div>
         <span class="text-[11px] font-bold px-3 py-1 rounded-full bg-slate-50 text-slate-700 border border-slate-200 whitespace-nowrap">رسالة / مناقشة / إحصاء</span>
       </div>
@@ -4432,87 +4432,45 @@ ${document.getElementById('dk-invite-msg').value}
     }
 
 
-    // ==================== 18. LIVE OFFLINE USAGE COUNTERS (VISITS, EXPORTS, PREPARED TEMPLATES) ====================
+    // ==================== 18. LOCAL USAGE COUNTERS (VISITS, EXPORT REQUESTS, PREPARED TEMPLATES) ====================
+    // Counts are stored on this device only; no online aggregation or fabricated starting totals.
+    const USAGE_STORAGE_KEY = 'pal_grad_usage_local_v3';
     function getUsageStats() {
-      let u = { visits: 0, exports: 0, templates: 1 };
+      let u = { visits: 0, exports: 0, templates: 0 };
       try {
-        let raw = localStorage.getItem('pal_grad_usage_counters_v2');
-        if (raw) {
-          u = Object.assign(u, JSON.parse(raw));
-        } else {
-          const oldRaw = localStorage.getItem('pal_grad_usage_counters_v1');
-          if (oldRaw) {
-            const old = JSON.parse(oldRaw);
-            u.exports = Number(old.exports) || 0;
-            u.templates = Number(old.templates) || 1;
-          }
-          localStorage.setItem('pal_grad_usage_counters_v2', JSON.stringify(u));
-        }
+        const raw = localStorage.getItem(USAGE_STORAGE_KEY);
+        if (raw) u = Object.assign(u, JSON.parse(raw));
       } catch (e) {}
+      u.visits = Math.max(0, Number(u.visits) || 0);
+      u.exports = Math.max(0, Number(u.exports) || 0);
+      u.templates = Math.max(0, Number(u.templates) || 0);
       return u;
     }
     function saveUsageStats(u) {
-      try { localStorage.setItem('pal_grad_usage_counters_v2', JSON.stringify(u)); } catch (e) {}
-      const s = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
-      s('cnt-visits', (2000 + (Number(u.visits) || 0)).toLocaleString('en-US'));
-      s('cnt-exports', u.exports);
-      s('cnt-templates', u.templates);
+      try { localStorage.setItem(USAGE_STORAGE_KEY, JSON.stringify(u)); } catch (e) {}
+      const set = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = Number(value).toLocaleString('en-US'); };
+      set('cnt-visits', 2000 + u.visits);
+      set('cnt-exports', u.exports);
+      set('cnt-templates', u.templates);
     }
-    const COUNTER_NS = 'mostafa-pal-grad-hub-v2';
-
-    async function syncCounterOnline(key, hit = true) {
-      if (!navigator.onLine) return null;
-      try {
-        const ep = hit ? 'hit' : 'get';
-        const resp = await fetch(`https://abacus.jasoncameron.dev/${ep}/${COUNTER_NS}/${key}`);
-        if (!resp.ok) return null;
-        const data = await resp.json();
-        if (typeof data.value === 'number') return data.value;
-      } catch (e) {}
-      return null;
-    }
-
-    function setUsageBadge(isOnlineSynced) {
+    function setUsageBadge() {
       const b = document.getElementById('usage-sync-badge');
-      if (!b) return;
-      b.textContent = isOnlineSynced ? '🟢 عداد مباشر (أونلاين + أوفلاين)' : '📴 عداد محلي (أوفلاين)';
+      if (b) b.textContent = '📴 عداد محلي محفوظ على هذا الجهاز';
     }
-
-    async function bumpUsageStat(key) {
+    function bumpUsageStat(key) {
+      if (key !== 'exports' && key !== 'templates' && key !== 'visits') return;
       const u = getUsageStats();
-      u[key] = (Number(u[key]) || 0) + 1;
+      u[key] += 1;
       saveUsageStats(u);
-      const liveVal = await syncCounterOnline(key, true);
-      if (liveVal !== null) {
-        const cur = getUsageStats();
-        cur[key] = Math.max(cur[key], liveVal);
-        saveUsageStats(cur);
-        setUsageBadge(true);
-      }
+      setUsageBadge();
     }
-
-    async function initUsageCounters() {
+    function initUsageCounters() {
       const u = getUsageStats();
-      u.visits = (Number(u.visits) || 0) + 1;
+      u.visits += 1;
       saveUsageStats(u);
-      setUsageBadge(false);
+      setUsageBadge();
 
-      // Try syncing real global counts online (graceful offline fallback)
-      const [liveVisits, liveExports, liveTemplates] = await Promise.all([
-        syncCounterOnline('visits', true),
-        syncCounterOnline('exports', false),
-        syncCounterOnline('templates', false)
-      ]);
-      if (liveVisits !== null || liveExports !== null || liveTemplates !== null) {
-        const cur = getUsageStats();
-        if (liveVisits !== null) cur.visits = Math.max(cur.visits, liveVisits);
-        if (liveExports !== null) cur.exports = Math.max(cur.exports, liveExports);
-        if (liveTemplates !== null) cur.templates = Math.max(cur.templates, liveTemplates);
-        saveUsageStats(cur);
-        setUsageBadge(true);
-      }
-
-      // Wrap exportToWord & window.print to auto-increment exported files counter
+      // This records a PDF/Word export request, not proof that a file was saved.
       const _origExportWord = exportToWord;
       exportToWord = function(htmlContent, fileName) {
         bumpUsageStat('exports');
@@ -4523,7 +4481,8 @@ ${document.getElementById('dk-invite-msg').value}
         bumpUsageStat('exports');
         return _origPrint();
       };
-      // Increment prepared templates counter when user saves backup or adopts a title/major
+
+      // Count actual template-related user actions on this device.
       const saveBtn = document.getElementById('btn-save-json');
       if (saveBtn) saveBtn.addEventListener('click', () => bumpUsageStat('templates'));
       document.addEventListener('click', e => {
