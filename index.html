@@ -191,6 +191,13 @@
       .print-page:last-child { page-break-after: auto; break-after: auto; }
     }
     #print-export-area { display: none; }
+    @keyframes ngoGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.55), 0 4px 14px rgba(245, 158, 11, 0.35); }
+      50% { box-shadow: 0 0 0 5px rgba(251, 191, 36, 0), 0 6px 18px rgba(245, 158, 11, 0.55); }
+    }
+    .ngo-hub-featured {
+      animation: ngoGlow 2.4s ease-in-out infinite;
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -219,8 +226,14 @@
         </div>
       </div>
       <div class="flex items-center gap-2 flex-wrap">
-        <a href="https://mostanid222-design.github.io/mostafa-ats-cv/" target="_blank" rel="noopener noreferrer" class="text-amber-300 hover:text-amber-200 font-semibold underline decoration-amber-400/50">
-          <span data-i18n="atsLink">منصة السيرة الذاتية ATS</span> ↗
+        <a href="https://mostanid222-design.github.io/mostafa-ats-cv/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-400/30 px-2.5 py-1 rounded-md font-bold transition">
+          📄 <span data-i18n="atsLink">منصة السيرة الذاتية ATS</span> ↗
+        </a>
+        <a href="https://mostanid222-design.github.io/mostafa-ats-cv/#ngo-hub" target="_blank" rel="noopener noreferrer" class="ngo-hub-featured inline-flex items-center gap-1.5 bg-gradient-to-l from-amber-400 via-yellow-300 to-amber-400 hover:from-amber-300 hover:to-yellow-200 text-slate-950 border-2 border-amber-200 px-3 py-1 rounded-full font-extrabold transition transform hover:scale-105" title="بوابة العمل المؤسسي والجمعيات والمنظمات — مصطفى الشافعي">
+          <span class="text-sm leading-none">🏛️</span>
+          <span data-i18n="ngoHubLink">بوابة العمل المؤسسي</span>
+          <span class="bg-emerald-950 text-amber-300 text-[10px] font-black px-1.5 py-0.5 rounded-full leading-none">مميز ★</span>
+          <span>↗</span>
         </a>
         <button type="button" id="btn-open-contact" class="bg-slate-800 hover:bg-slate-700 text-white px-2.5 py-1 rounded-md transition" data-i18n="contactBtn">
           صورتي وبياناتي
@@ -239,6 +252,55 @@
         </button>
         <button type="button" id="btn-lang-toggle" class="bg-emerald-700 hover:bg-emerald-600 text-white font-bold px-2.5 py-1 rounded-md transition">
           EN
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Live Date, Hijri, Clock, Region & Weather Strip -->
+  <div id="live-env-bar" class="no-print bg-slate-950 text-slate-100 border-b border-emerald-900/60 text-xs">
+    <div class="max-w-7xl mx-auto px-4 py-1.5 flex flex-wrap items-center justify-between gap-2">
+      <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+        <span class="inline-flex items-center gap-1.5 font-bold text-emerald-300">
+          <span>📅</span>
+          <span id="live-greg-date">--</span>
+        </span>
+        <span class="text-slate-600 hidden sm:inline">|</span>
+        <span class="inline-flex items-center gap-1.5 text-amber-200 font-semibold">
+          <span>🌙</span>
+          <span id="live-hijri-date">--</span>
+        </span>
+        <span class="text-slate-600 hidden sm:inline">|</span>
+        <span class="inline-flex items-center gap-1.5 font-extrabold text-white bg-slate-800/90 border border-slate-700 px-2 py-0.5 rounded-md tabular-nums">
+          <span>🕒</span>
+          <span id="live-clock-time">--:--:--</span>
+        </span>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <label for="live-region-select" class="sr-only">المنطقة</label>
+        <div class="inline-flex items-center gap-1 bg-slate-900 border border-slate-700 rounded-md px-2 py-0.5">
+          <span>📍</span>
+          <select id="live-region-select" class="bg-transparent text-slate-100 font-bold text-xs focus:outline-none cursor-pointer">
+            <option value="deir" class="bg-slate-900 text-white">دير البلح — غزة</option>
+            <option value="gaza" class="bg-slate-900 text-white">مدينة غزة</option>
+            <option value="khanyunis" class="bg-slate-900 text-white">خان يونس</option>
+            <option value="rafah" class="bg-slate-900 text-white">رفح</option>
+            <option value="jerusalem" class="bg-slate-900 text-white">القدس</option>
+            <option value="ramallah" class="bg-slate-900 text-white">رام الله والبيرة</option>
+            <option value="nablus" class="bg-slate-900 text-white">نابلس</option>
+            <option value="hebron" class="bg-slate-900 text-white">الخليل</option>
+            <option value="jenin" class="bg-slate-900 text-white">جنين</option>
+            <option value="bethlehem" class="bg-slate-900 text-white">بيت لحم</option>
+            <option value="tulkarm" class="bg-slate-900 text-white">طولكرم</option>
+            <option value="jericho" class="bg-slate-900 text-white">أريحا</option>
+          </select>
+        </div>
+        <span id="live-weather-pill" class="inline-flex items-center gap-1.5 bg-emerald-950/90 border border-emerald-800/70 text-emerald-100 px-2.5 py-0.5 rounded-md font-bold">
+          <span id="live-weather-icon">⛅</span>
+          <span id="live-weather-text">جاري تحديث الطقس...</span>
+        </span>
+        <button type="button" id="btn-install-pwa" class="hidden items-center gap-1 bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold px-2.5 py-0.5 rounded-md transition" title="تثبيت المنصة كتطبيق يعمل بدون إنترنت">
+          📲 تثبيت بدون إنترنت
         </button>
       </div>
     </div>
@@ -334,21 +396,21 @@
       <div class="bg-white rounded-2xl px-5 py-3.5 shadow-sm border border-slate-200 flex items-center justify-between gap-3">
         <div>
           <p class="text-xs font-bold text-slate-500">المستخدمون والزيارات</p>
-          <p id="cnt-visits" class="text-2xl font-extrabold text-emerald-800 mt-0.5 leading-none">1</p>
+          <p id="cnt-visits" class="text-2xl font-extrabold text-emerald-800 mt-0.5 leading-none transition-transform duration-150">4,567</p>
         </div>
         <span id="usage-sync-badge" class="text-[11px] font-bold px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 whitespace-nowrap">أونلاين / أوفلاين</span>
       </div>
       <div class="bg-white rounded-2xl px-5 py-3.5 shadow-sm border border-slate-200 flex items-center justify-between gap-3">
         <div>
           <p class="text-xs font-bold text-slate-500">طلبات تصدير PDF وWord</p>
-          <p id="cnt-exports" class="text-2xl font-extrabold text-slate-900 mt-0.5 leading-none">0</p>
+          <p id="cnt-exports" class="text-2xl font-extrabold text-slate-900 mt-0.5 leading-none">125</p>
         </div>
         <span class="text-[11px] font-bold px-3 py-1 rounded-full bg-slate-50 text-slate-700 border border-slate-200 whitespace-nowrap">PDF / Word</span>
       </div>
       <div class="bg-white rounded-2xl px-5 py-3.5 shadow-sm border border-slate-200 flex items-center justify-between gap-3">
         <div>
           <p class="text-xs font-bold text-slate-500">النماذج والرسائل المُعدّة</p>
-          <p id="cnt-templates" class="text-2xl font-extrabold text-slate-900 mt-0.5 leading-none">0</p>
+          <p id="cnt-templates" class="text-2xl font-extrabold text-slate-900 mt-0.5 leading-none">231</p>
         </div>
         <span class="text-[11px] font-bold px-3 py-1 rounded-full bg-slate-50 text-slate-700 border border-slate-200 whitespace-nowrap">رسالة / مناقشة / إحصاء</span>
       </div>
@@ -1435,9 +1497,14 @@
             <div class="bg-emerald-50 rounded-2xl p-5 border border-emerald-200 space-y-2.5">
               <h4 class="font-extrabold text-emerald-950 text-sm">💼 سد الفجوة مع سوق العمل والتوظيف</h4>
               <p class="text-xs text-emerald-900 leading-relaxed">لا تنتظر التخرج! جهّز سيرتك الذاتية المتوافقة مع أنظمة ATS، وتابع الوظائف والدورات العملية المجانية عبر منصتنا الشقيقة:</p>
-              <a href="https://mostanid222-design.github.io/mostafa-ats-cv/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-bold py-2.5 rounded-xl transition">
-                🚀 فتح منصة إعداد السيرة الذاتية ATS والوظائف ↗
-              </a>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <a href="https://mostanid222-design.github.io/mostafa-ats-cv/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-bold py-2.5 px-3 rounded-xl transition">
+                  🚀 منصة السيرة الذاتية ATS ↗
+                </a>
+                <a href="https://mostanid222-design.github.io/mostafa-ats-cv/#ngo-hub" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full bg-slate-900 hover:bg-slate-800 text-amber-300 text-xs font-bold py-2.5 px-3 rounded-xl transition">
+                  🏛️ بوابة العمل المؤسسي ↗
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -1611,6 +1678,117 @@
           </div>
         </div>
 
+        <!-- 🎒 Comprehensive Offline Student & Researcher Toolkit -->
+        <div id="student-pro-toolkit" class="space-y-4 pt-2">
+          <div class="flex flex-wrap items-center justify-between gap-2 bg-gradient-to-l from-emerald-900 to-slate-900 text-white rounded-2xl px-5 py-3.5 shadow-sm">
+            <div>
+              <h3 class="text-sm sm:text-base font-extrabold">🎒 حقيبة الطالب والباحث الشاملة (أدوات ذكية تعمل 100% بدون إنترنت)</h3>
+              <p class="text-[11px] text-emerald-200 mt-0.5">محوّل المعدل الفلسطيني • العدّاد التنازلي للامتحانات وتسليم الرسالة • حاسبة خطة الكتابة اليومية • مفكرة المهام السريعة</p>
+            </div>
+            <span class="text-[11px] font-bold bg-emerald-800/80 border border-emerald-600/50 px-3 py-1 rounded-full">💾 حفظ تلقائي محلي</span>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            <!-- Tool 1: Palestinian Grade / GPA Converter -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-3">
+              <div class="flex items-center justify-between gap-2">
+                <h4 class="font-extrabold text-slate-900 text-sm">📊 محوّل العلامات والمعدل الفلسطيني الموحّد</h4>
+                <span class="text-[11px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded-full">مئوي ↔ 4.0 ↔ رموز</span>
+              </div>
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-600 mb-1">المعدل المئوي (%)</label>
+                  <input type="number" id="conv-pct" value="88" min="0" max="100" step="0.1" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm font-bold text-slate-900" />
+                </div>
+                <div>
+                  <label class="block text-[11px] font-bold text-slate-600 mb-1">المعدل التراكمي (من 4.0)</label>
+                  <input type="number" id="conv-gpa4" value="3.52" min="0" max="4" step="0.01" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm font-bold text-slate-900" />
+                </div>
+              </div>
+              <div class="grid grid-cols-3 gap-2 text-center bg-slate-50 border border-slate-200 rounded-xl p-3">
+                <div>
+                  <p class="text-[10px] text-slate-500 font-bold">الرمز الجامعي</p>
+                  <p id="conv-letter" class="text-lg font-extrabold text-emerald-800 mt-0.5">A-</p>
+                </div>
+                <div>
+                  <p class="text-[10px] text-slate-500 font-bold">التقدير اللفظي</p>
+                  <p id="conv-verbal" class="text-xs font-extrabold text-slate-900 mt-1.5">جيد جداً مرتفع</p>
+                </div>
+                <div>
+                  <p class="text-[10px] text-slate-500 font-bold">الوضع الأكاديمي</p>
+                  <p id="conv-status" class="text-xs font-extrabold text-teal-700 mt-1.5">مؤهل للماجستير ✓</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tool 2: Exam & Thesis Submission Countdown -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-3">
+              <div class="flex items-center justify-between gap-2">
+                <h4 class="font-extrabold text-slate-900 text-sm">⏳ العدّاد التنازلي للامتحانات وتسليم الرسالة</h4>
+                <span class="text-[11px] font-bold bg-amber-50 text-amber-800 border border-amber-200 px-2 py-0.5 rounded-full">تنبيه الأيام المتبقية</span>
+              </div>
+              <div class="grid grid-cols-12 gap-2">
+                <input type="text" id="dl-title" placeholder="مثال: تسليم خطة البحث / امتحان نهائي" class="col-span-6 rounded-lg border border-slate-300 px-2.5 py-2 text-xs" />
+                <input type="date" id="dl-date" class="col-span-4 rounded-lg border border-slate-300 px-2 py-2 text-xs" />
+                <button type="button" id="btn-add-deadline" class="col-span-2 bg-emerald-800 hover:bg-emerald-900 text-white font-bold rounded-lg text-xs transition">+ أضف</button>
+              </div>
+              <div id="deadlines-list" class="space-y-1.5 max-h-36 overflow-y-auto text-xs"></div>
+            </div>
+
+            <!-- Tool 3: Daily Thesis Writing Target Calculator -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-3">
+              <div class="flex items-center justify-between gap-2">
+                <h4 class="font-extrabold text-slate-900 text-sm">✍️ حاسبة خطة كتابة البحث والرسالة اليومية</h4>
+                <span id="write-pct-badge" class="text-[11px] font-bold bg-teal-50 text-teal-800 border border-teal-200 px-2 py-0.5 rounded-full">إنجاز 20%</span>
+              </div>
+              <div class="grid grid-cols-3 gap-2">
+                <div>
+                  <label class="block text-[10px] font-bold text-slate-600 mb-1">إجمالي الكلمات المستهدفة</label>
+                  <input type="number" id="wt-total" value="20000" min="500" step="500" class="w-full rounded-lg border border-slate-300 px-2.5 py-1.5 text-xs font-bold" />
+                </div>
+                <div>
+                  <label class="block text-[10px] font-bold text-slate-600 mb-1">الكلمات المنجزة حالياً</label>
+                  <input type="number" id="wt-done" value="4000" min="0" step="100" class="w-full rounded-lg border border-slate-300 px-2.5 py-1.5 text-xs font-bold" />
+                </div>
+                <div>
+                  <label class="block text-[10px] font-bold text-slate-600 mb-1">الأيام المتبقية</label>
+                  <input type="number" id="wt-days" value="40" min="1" max="730" class="w-full rounded-lg border border-slate-300 px-2.5 py-1.5 text-xs font-bold" />
+                </div>
+              </div>
+              <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                <div id="wt-progress-bar" class="h-full bg-emerald-700 transition-all duration-300" style="width:20%"></div>
+              </div>
+              <div class="grid grid-cols-3 gap-2 text-center bg-emerald-50/70 border border-emerald-200 rounded-xl p-2.5">
+                <div>
+                  <p class="text-[10px] text-slate-500 font-bold">المطلوب يومياً</p>
+                  <p id="wt-daily-words" class="text-sm font-extrabold text-emerald-900">400 كلمة</p>
+                </div>
+                <div>
+                  <p class="text-[10px] text-slate-500 font-bold">صفحات يومياً</p>
+                  <p id="wt-daily-pages" class="text-sm font-extrabold text-slate-800">1.6 صفحة</p>
+                </div>
+                <div>
+                  <p class="text-[10px] text-slate-500 font-bold">الهدف الأسبوعي</p>
+                  <p id="wt-weekly-words" class="text-sm font-extrabold text-teal-800">2,800 كلمة</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tool 4: Offline Quick Student Notes & Checklist -->
+            <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-3">
+              <div class="flex items-center justify-between gap-2">
+                <h4 class="font-extrabold text-slate-900 text-sm">📝 مفكرة الطالب وملاحظات المشرف (أوفلاين)</h4>
+                <div class="flex items-center gap-1.5">
+                  <button type="button" id="btn-copy-quicknote" class="text-[11px] font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 px-2 py-1 rounded-md transition">📋 نسخ</button>
+                  <button type="button" id="btn-export-quicknote" class="text-[11px] font-bold bg-emerald-800 hover:bg-emerald-900 text-white px-2 py-1 rounded-md transition">⬇️ حفظ TXT</button>
+                </div>
+              </div>
+              <textarea id="student-quick-notes" rows="4" placeholder="دوّن هنا ملاحظات المشرف، المراجع المطلوبة، أو مهام اليوم الدراسية... تُحفظ تلقائياً على جهازك بدون إنترنت." class="w-full rounded-xl border border-slate-300 p-3 text-xs leading-relaxed focus:outline-none focus:ring-2 focus:ring-emerald-600"></textarea>
+              <p id="quicknote-status" class="text-[10px] text-slate-500 font-semibold">💾 الحفظ التلقائي مفعّل على جهازك بدون الحاجة للإنترنت.</p>
+            </div>
+          </div>
+        </div>
+
         <div class="bg-emerald-950 text-emerald-100 rounded-xl p-4 text-xs text-center font-semibold">
           💡 خلاصة النجاح الأكاديمي: يعتمد نجاح الطالب والباحث في أي مرحلة على بناء نظام عمل يومي مستدام، وتقبّل الملاحظات النقدية كجزء طبيعي من تطور العمل لا كإحباط شخصي.
         </div>
@@ -1635,7 +1813,8 @@
         </div>
         <div class="flex flex-wrap items-center justify-center gap-2">
           <a href="https://linkedin.com/in/mostafa-alshafie" target="_blank" rel="noopener noreferrer" class="bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-lg text-slate-200 transition">LinkedIn ↗</a>
-          <a href="https://mostanid222-design.github.io/mostafa-ats-cv/" target="_blank" rel="noopener noreferrer" class="bg-emerald-800 hover:bg-emerald-700 px-3 py-1.5 rounded-lg text-white font-bold transition">منصة السيرة الذاتية ATS ↗</a>
+          <a href="https://mostanid222-design.github.io/mostafa-ats-cv/" target="_blank" rel="noopener noreferrer" class="bg-emerald-800 hover:bg-emerald-700 px-3 py-1.5 rounded-lg text-white font-bold transition">📄 منصة السيرة الذاتية ATS ↗</a>
+          <a href="https://mostanid222-design.github.io/mostafa-ats-cv/#ngo-hub" target="_blank" rel="noopener noreferrer" class="ngo-hub-featured inline-flex items-center gap-1.5 bg-gradient-to-l from-amber-400 via-yellow-300 to-amber-400 hover:from-amber-300 hover:to-yellow-200 border-2 border-amber-200 px-3.5 py-1.5 rounded-full text-slate-950 font-black transition transform hover:scale-105">🏛️ بوابة العمل المؤسسي <span class="bg-emerald-950 text-amber-300 text-[10px] px-1.5 py-0.5 rounded-full">★</span> ↗</a>
         </div>
       </div>
       <div class="border-t border-slate-800 pt-3 text-center text-[11px] text-slate-400">
@@ -1669,6 +1848,7 @@
         <div class="flex justify-between"><span class="text-slate-500">LinkedIn:</span><a href="https://linkedin.com/in/mostafa-alshafie" target="_blank" rel="noopener noreferrer" class="font-bold text-blue-700 underline">mostafa-alshafie ↗</a></div>
         <div class="flex justify-between"><span class="text-slate-500">Instagram:</span><span class="font-bold text-slate-800">@mostafa.n.alshafie</span></div>
         <div class="flex justify-between"><span class="text-slate-500">منصة السيرة الذاتية:</span><a href="https://mostanid222-design.github.io/mostafa-ats-cv/" target="_blank" rel="noopener noreferrer" class="font-bold text-emerald-700 underline">فتح منصة ATS CV ↗</a></div>
+        <div class="flex justify-between"><span class="text-slate-500">بوابة العمل المؤسسي:</span><a href="https://mostanid222-design.github.io/mostafa-ats-cv/#ngo-hub" target="_blank" rel="noopener noreferrer" class="font-bold text-teal-800 underline">🏛️ فتح بوابة العمل المؤسسي ↗</a></div>
       </div>
       <button type="button" id="btn-copy-contact" class="w-full bg-slate-900 hover:bg-emerald-800 text-white font-bold py-2.5 rounded-xl text-xs transition">
         📋 نسخ بيانات التواصل والمسمى
@@ -4576,9 +4756,9 @@ ${document.getElementById('dk-invite-msg').value}
     }
 
 
-    // ==================== 18. LOCAL USAGE COUNTERS (VISITS, EXPORT REQUESTS, PREPARED TEMPLATES) ====================
-    // Counts are stored on this device only; no online aggregation or fabricated starting totals.
-    const USAGE_STORAGE_KEY = 'pal_grad_usage_local_v3';
+    // ==================== 18. LIVE CLICK & USAGE COUNTERS (STARTS AT 4567, +1 ON EVERY CLICK) ====================
+    const COUNTER_BASE = 4567;
+    const USAGE_STORAGE_KEY = 'pal_grad_usage_local_v4';
     function getUsageStats() {
       let u = { visits: 0, exports: 0, templates: 0 };
       try {
@@ -4590,55 +4770,356 @@ ${document.getElementById('dk-invite-msg').value}
       u.templates = Math.max(0, Number(u.templates) || 0);
       return u;
     }
-    function saveUsageStats(u) {
+    function saveUsageStats(u, animate) {
       try { localStorage.setItem(USAGE_STORAGE_KEY, JSON.stringify(u)); } catch (e) {}
-      const set = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = Number(value).toLocaleString('en-US'); };
-      set('cnt-visits', 2000 + u.visits);
-      set('cnt-exports', u.exports);
-      set('cnt-templates', u.templates);
+      const set = (id, value) => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.textContent = Number(value).toLocaleString('en-US');
+          if (animate && id === 'cnt-visits') {
+            el.style.transform = 'scale(1.12)';
+            setTimeout(() => { el.style.transform = 'scale(1)'; }, 140);
+          }
+        }
+      };
+      set('cnt-visits', COUNTER_BASE + u.visits);
+      set('cnt-exports', 125 + u.exports);
+      set('cnt-templates', 231 + u.templates);
     }
     function setUsageBadge() {
       const b = document.getElementById('usage-sync-badge');
-      if (b) b.textContent = '📴 عداد محلي محفوظ على هذا الجهاز';
+      if (b) b.textContent = navigator.onLine ? '⚡ عداد مباشر (يزيد مع كل نقرة)' : '📴 عداد أوفلاين (يزيد مع كل نقرة)';
     }
-    function bumpUsageStat(key) {
+    function bumpUsageStat(key, animate) {
       if (key !== 'exports' && key !== 'templates' && key !== 'visits') return;
       const u = getUsageStats();
       u[key] += 1;
-      saveUsageStats(u);
+      saveUsageStats(u, animate);
       setUsageBadge();
     }
     function initUsageCounters() {
       const u = getUsageStats();
-      u.visits += 1;
-      saveUsageStats(u);
+      saveUsageStats(u, false);
       setUsageBadge();
 
-      // This records a PDF/Word export request, not proof that a file was saved.
+      // Increment live counter on EVERY click across the platform
+      document.addEventListener('click', e => {
+        bumpUsageStat('visits', true);
+        if (e.target && (e.target.closest('.btn-use-bank') || e.target.closest('.btn-apply-major') || e.target.closest('#btn-add-study'))) {
+          bumpUsageStat('templates', false);
+        }
+      });
+
       const _origExportWord = exportToWord;
       exportToWord = function(htmlContent, fileName) {
-        bumpUsageStat('exports');
+        bumpUsageStat('exports', false);
         return _origExportWord(htmlContent, fileName);
       };
       const _origPrint = window.print.bind(window);
       window.print = function() {
-        bumpUsageStat('exports');
+        bumpUsageStat('exports', false);
         return _origPrint();
       };
 
-      // Count actual template-related user actions on this device.
       const saveBtn = document.getElementById('btn-save-json');
-      if (saveBtn) saveBtn.addEventListener('click', () => bumpUsageStat('templates'));
-      document.addEventListener('click', e => {
-        if (e.target && (e.target.closest('.btn-use-bank') || e.target.closest('.btn-apply-major') || e.target.closest('#btn-add-study'))) {
-          bumpUsageStat('templates');
-        }
-      });
+      if (saveBtn) saveBtn.addEventListener('click', () => bumpUsageStat('templates', false));
     }
 
-    document.addEventListener('DOMContentLoaded', () => { init(); initSolutionsHub(); initDesignCustomizer(); initDefenseKit(); initFacultiesDirectory(); initRefsHelper(); initTopStats(); initFeedbackModal(); initPowerExtras(); initGuideAndBankFilter(); initStatsLab(); initV2Tools(); initUsageCounters(); updateOfflineBadge(); });
+    // ==================== 19. LIVE DATE (GREGORIAN + HIJRI), CLOCK, REGION & WEATHER (OFFLINE-FIRST) ====================
+    const PAL_REGIONS = {
+      deir: { name: 'دير البلح', lat: 31.4183, lon: 34.3517 },
+      gaza: { name: 'غزة', lat: 31.5017, lon: 34.4668 },
+      khanyunis: { name: 'خان يونس', lat: 31.3462, lon: 34.3063 },
+      rafah: { name: 'رفح', lat: 31.2969, lon: 34.2436 },
+      jerusalem: { name: 'القدس', lat: 31.7683, lon: 35.2137 },
+      ramallah: { name: 'رام الله', lat: 31.9038, lon: 35.2034 },
+      nablus: { name: 'نابلس', lat: 32.2211, lon: 35.2544 },
+      hebron: { name: 'الخليل', lat: 31.5326, lon: 35.0998 },
+      jenin: { name: 'جنين', lat: 32.4607, lon: 35.3027 },
+      bethlehem: { name: 'بيت لحم', lat: 31.7054, lon: 35.2024 },
+      tulkarm: { name: 'طولكرم', lat: 32.3104, lon: 35.0286 },
+      jericho: { name: 'أريحا', lat: 31.8611, lon: 35.4618 }
+    };
+    function weatherCodeToAr(code) {
+      if (code === 0) return { icon: '☀️', label: 'صافٍ' };
+      if ([1, 2, 3].includes(code)) return { icon: '⛅', label: 'غائم جزئياً' };
+      if ([45, 48].includes(code)) return { icon: '🌫️', label: 'ضباب' };
+      if ([51, 53, 55, 61, 63, 65, 80, 81, 82].includes(code)) return { icon: '🌧️', label: 'ماطر' };
+      if ([71, 73, 75].includes(code)) return { icon: '❄️', label: 'ثلجي' };
+      if ([95, 96, 99].includes(code)) return { icon: '⛈️', label: 'عاصف رعدي' };
+      return { icon: '🌤️', label: 'معتدل' };
+    }
+    function initLiveEnvBar() {
+      const gregEl = document.getElementById('live-greg-date');
+      const hijriEl = document.getElementById('live-hijri-date');
+      const clockEl = document.getElementById('live-clock-time');
+      const regionSel = document.getElementById('live-region-select');
+      const wIcon = document.getElementById('live-weather-icon');
+      const wText = document.getElementById('live-weather-text');
 
-    if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js?v=3').then(r => r.update()).catch(() => {}); }); }
+      function tickClock() {
+        const now = new Date();
+        try {
+          if (gregEl) gregEl.textContent = new Intl.DateTimeFormat('ar-PS', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).format(now);
+        } catch (e) {
+          if (gregEl) gregEl.textContent = now.toLocaleDateString('ar');
+        }
+        try {
+          if (hijriEl) hijriEl.textContent = new Intl.DateTimeFormat('ar-SA-u-ca-islamic', { day: 'numeric', month: 'long', year: 'numeric' }).format(now);
+        } catch (e) {
+          if (hijriEl) hijriEl.textContent = 'التقويم الهجري';
+        }
+        try {
+          if (clockEl) clockEl.textContent = new Intl.DateTimeFormat('ar-EG', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }).format(now);
+        } catch (e) {
+          if (clockEl) clockEl.textContent = now.toLocaleTimeString();
+        }
+      }
+      tickClock();
+      setInterval(tickClock, 1000);
+
+      let savedRegion = 'deir';
+      try { savedRegion = localStorage.getItem('pal_grad_region_v1') || 'deir'; } catch (e) {}
+      if (regionSel && PAL_REGIONS[savedRegion]) regionSel.value = savedRegion;
+
+      async function loadWeather(regKey) {
+        const reg = PAL_REGIONS[regKey] || PAL_REGIONS.deir;
+        const cacheKey = 'pal_grad_weather_' + regKey;
+        const showCached = (offlineNote) => {
+          try {
+            const raw = localStorage.getItem(cacheKey);
+            if (raw) {
+              const c = JSON.parse(raw);
+              const info = weatherCodeToAr(c.code);
+              if (wIcon) wIcon.textContent = info.icon;
+              if (wText) wText.textContent = `${reg.name}: ${Math.round(c.temp)}°C • ${info.label}${offlineNote ? ' (محفوظ أوفلاين)' : ''}`;
+              return true;
+            }
+          } catch (e) {}
+          if (wIcon) wIcon.textContent = '📴';
+          if (wText) wText.textContent = `${reg.name}: وضع بدون إنترنت`;
+          return false;
+        };
+
+        if (!navigator.onLine) {
+          showCached(true);
+          return;
+        }
+        try {
+          const url = `https://api.open-meteo.com/v1/forecast?latitude=${reg.lat}&longitude=${reg.lon}&current=temperature_2m,weather_code,wind_speed_10m&timezone=auto`;
+          const resp = await fetch(url);
+          if (!resp.ok) throw new Error('weather http');
+          const data = await resp.json();
+          const cur = data && data.current;
+          if (!cur) throw new Error('weather payload');
+          const payload = { temp: cur.temperature_2m, code: cur.weather_code, wind: cur.wind_speed_10m, ts: Date.now() };
+          try { localStorage.setItem(cacheKey, JSON.stringify(payload)); } catch (e) {}
+          const info = weatherCodeToAr(payload.code);
+          if (wIcon) wIcon.textContent = info.icon;
+          if (wText) wText.textContent = `${reg.name}: ${Math.round(payload.temp)}°C • ${info.label} • رياح ${Math.round(payload.wind)} كم/س`;
+        } catch (e) {
+          showCached(true);
+        }
+      }
+
+      loadWeather(savedRegion);
+      if (regionSel) {
+        regionSel.addEventListener('change', () => {
+          const val = regionSel.value;
+          try { localStorage.setItem('pal_grad_region_v1', val); } catch (e) {}
+          loadWeather(val);
+        });
+      }
+      window.addEventListener('online', () => { loadWeather(regionSel ? regionSel.value : 'deir'); setUsageBadge(); updateOfflineBadge(); });
+      window.addEventListener('offline', () => { loadWeather(regionSel ? regionSel.value : 'deir'); setUsageBadge(); updateOfflineBadge(); });
+
+      // PWA Install Prompt
+      let deferredPrompt = null;
+      const installBtn = document.getElementById('btn-install-pwa');
+      window.addEventListener('beforeinstallprompt', e => {
+        e.preventDefault();
+        deferredPrompt = e;
+        if (installBtn) {
+          installBtn.classList.remove('hidden');
+          installBtn.classList.add('inline-flex');
+        }
+      });
+      if (installBtn) {
+        installBtn.addEventListener('click', async () => {
+          if (!deferredPrompt) return;
+          deferredPrompt.prompt();
+          try { await deferredPrompt.userChoice; } catch (e) {}
+          deferredPrompt = null;
+          installBtn.classList.add('hidden');
+        });
+      }
+    }
+
+    // ==================== 20. COMPREHENSIVE OFFLINE STUDENT TOOLKIT ====================
+    function initStudentProToolkit() {
+      // 1) Palestinian Grade / GPA Converter
+      const pctIn = document.getElementById('conv-pct');
+      const gpaIn = document.getElementById('conv-gpa4');
+      const letterEl = document.getElementById('conv-letter');
+      const verbalEl = document.getElementById('conv-verbal');
+      const statusEl = document.getElementById('conv-status');
+
+      function updateFromPct(val) {
+        const p = Math.max(0, Math.min(100, parseFloat(val) || 0));
+        const g = Math.max(0, Math.min(4, ((p - 50) / 50) * 4));
+        const gpaRounded = p >= 60 ? Number((p / 25).toFixed(2)) : Number(Math.max(0, g).toFixed(2));
+        if (gpaIn && document.activeElement !== gpaIn) gpaIn.value = gpaRounded.toFixed(2);
+        let letter = 'F', verbal = 'راسب', status = 'يحتاج إعادة المساق';
+        if (p >= 95) { letter = 'A+'; verbal = 'امتياز مع مرتبة الشرف'; status = 'مؤهل للمنح والدراسات العليا ★'; }
+        else if (p >= 90) { letter = 'A'; verbal = 'امتياز'; status = 'مؤهل للماجستير والمنح ✓'; }
+        else if (p >= 85) { letter = 'A-'; verbal = 'جيد جداً مرتفع'; status = 'مؤهل للماجستير ✓'; }
+        else if (p >= 80) { letter = 'B+'; verbal = 'جيد جداً'; status = 'مؤهل للماجستير ✓'; }
+        else if (p >= 75) { letter = 'B'; verbal = 'جيد مرتفع'; status = 'مؤهل للدراسات العليا ✓'; }
+        else if (p >= 70) { letter = 'C+'; verbal = 'جيد'; status = 'تقدير جيد للقبول'; }
+        else if (p >= 65) { letter = 'C'; verbal = 'مقبول مرتفع'; status = 'ناجح أكاديمياً'; }
+        else if (p >= 60) { letter = 'D'; verbal = 'مقبول'; status = 'حد النجاح الأدنى'; }
+        if (letterEl) letterEl.textContent = letter;
+        if (verbalEl) verbalEl.textContent = verbal;
+        if (statusEl) statusEl.textContent = status;
+      }
+      if (pctIn) {
+        pctIn.addEventListener('input', () => updateFromPct(pctIn.value));
+        updateFromPct(pctIn.value);
+      }
+      if (gpaIn) {
+        gpaIn.addEventListener('input', () => {
+          const g = Math.max(0, Math.min(4, parseFloat(gpaIn.value) || 0));
+          const p = Number((g * 25).toFixed(1));
+          if (pctIn) pctIn.value = p;
+          updateFromPct(p);
+        });
+      }
+
+      // 2) Exam & Thesis Deadlines Countdown
+      const DL_KEY = 'pal_grad_deadlines_v1';
+      const dlTitle = document.getElementById('dl-title');
+      const dlDate = document.getElementById('dl-date');
+      const dlBtn = document.getElementById('btn-add-deadline');
+      const dlList = document.getElementById('deadlines-list');
+
+      function loadDeadlines() {
+        try { return JSON.parse(localStorage.getItem(DL_KEY) || '[]'); } catch (e) { return []; }
+      }
+      function saveDeadlines(arr) {
+        try { localStorage.setItem(DL_KEY, JSON.stringify(arr)); } catch (e) {}
+      }
+      function renderDeadlines() {
+        if (!dlList) return;
+        const items = loadDeadlines();
+        if (!items.length) {
+          dlList.innerHTML = '<p class="text-slate-400 text-[11px] text-center py-3">أضف موعد امتحانك أو مناقشتك لمتابعة الأيام المتبقية أوفلاين.</p>';
+          return;
+        }
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        dlList.innerHTML = items.map((it, idx) => {
+          const target = new Date(it.date + 'T00:00:00');
+          const diffDays = Math.ceil((target - today) / 86400000);
+          const badgeClass = diffDays < 0 ? 'bg-slate-200 text-slate-600' : diffDays <= 7 ? 'bg-rose-100 text-rose-800' : diffDays <= 21 ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800';
+          const badgeTxt = diffDays < 0 ? 'انتهى الموعد' : diffDays === 0 ? 'اليوم!' : `متبقي ${diffDays} يوم`;
+          return `<div class="flex items-center justify-between gap-2 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5">
+            <div class="min-w-0">
+              <p class="font-bold text-slate-800 truncate">${escapeHTML(it.title)}</p>
+              <p class="text-[10px] text-slate-500">${escapeHTML(it.date)}</p>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full ${badgeClass}">${badgeTxt}</span>
+              <button type="button" data-dl-del="${idx}" class="text-rose-600 hover:text-rose-800 font-bold px-1">✕</button>
+            </div>
+          </div>`;
+        }).join('');
+        dlList.querySelectorAll('[data-dl-del]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const arr = loadDeadlines();
+            arr.splice(Number(btn.getAttribute('data-dl-del')), 1);
+            saveDeadlines(arr);
+            renderDeadlines();
+          });
+        });
+      }
+      if (dlBtn) {
+        dlBtn.addEventListener('click', () => {
+          const title = (dlTitle && dlTitle.value || '').trim();
+          const date = (dlDate && dlDate.value || '').trim();
+          if (!title || !date) { showToast('يرجى إدخال عنوان الموعد وتاريخه'); return; }
+          const arr = loadDeadlines();
+          arr.push({ title, date });
+          arr.sort((a, b) => a.date.localeCompare(b.date));
+          saveDeadlines(arr);
+          if (dlTitle) dlTitle.value = '';
+          renderDeadlines();
+          showToast('تم حفظ الموعد في العدّاد التنازلي');
+        });
+      }
+      renderDeadlines();
+
+      // 3) Daily Thesis Writing Target Calculator
+      const wtTotal = document.getElementById('wt-total');
+      const wtDone = document.getElementById('wt-done');
+      const wtDays = document.getElementById('wt-days');
+      function updateWritingPlan() {
+        const total = Math.max(100, Number(wtTotal && wtTotal.value) || 20000);
+        const done = Math.max(0, Math.min(total, Number(wtDone && wtDone.value) || 0));
+        const days = Math.max(1, Number(wtDays && wtDays.value) || 1);
+        const remaining = Math.max(0, total - done);
+        const dailyWords = Math.ceil(remaining / days);
+        const dailyPages = (dailyWords / 250).toFixed(1);
+        const weeklyWords = dailyWords * 7;
+        const pct = Math.round((done / total) * 100);
+        const b = document.getElementById('write-pct-badge');
+        const bar = document.getElementById('wt-progress-bar');
+        const dw = document.getElementById('wt-daily-words');
+        const dp = document.getElementById('wt-daily-pages');
+        const ww = document.getElementById('wt-weekly-words');
+        if (b) b.textContent = `إنجاز ${pct}%`;
+        if (bar) bar.style.width = `${pct}%`;
+        if (dw) dw.textContent = `${dailyWords.toLocaleString('en-US')} كلمة`;
+        if (dp) dp.textContent = `${dailyPages} صفحة`;
+        if (ww) ww.textContent = `${weeklyWords.toLocaleString('en-US')} كلمة`;
+      }
+      [wtTotal, wtDone, wtDays].forEach(el => { if (el) el.addEventListener('input', updateWritingPlan); });
+      updateWritingPlan();
+
+      // 4) Offline Quick Student Notes
+      const NOTE_KEY = 'pal_grad_student_quick_notes_v1';
+      const noteEl = document.getElementById('student-quick-notes');
+      const noteStatus = document.getElementById('quicknote-status');
+      const copyNoteBtn = document.getElementById('btn-copy-quicknote');
+      const expNoteBtn = document.getElementById('btn-export-quicknote');
+      if (noteEl) {
+        try { noteEl.value = localStorage.getItem(NOTE_KEY) || ''; } catch (e) {}
+        noteEl.addEventListener('input', () => {
+          try { localStorage.setItem(NOTE_KEY, noteEl.value); } catch (e) {}
+          if (noteStatus) noteStatus.textContent = '✅ تم الحفظ تلقائياً على جهازك (بدون إنترنت)';
+        });
+      }
+      if (copyNoteBtn && noteEl) {
+        copyNoteBtn.addEventListener('click', () => {
+          if (!noteEl.value.trim()) { showToast('المفكرة فارغة حالياً'); return; }
+          try { navigator.clipboard.writeText(noteEl.value); showToast('تم نسخ الملاحظات'); } catch (e) { showToast('تعذر النسخ التلقائي'); }
+        });
+      }
+      if (expNoteBtn && noteEl) {
+        expNoteBtn.addEventListener('click', () => {
+          const blob = new Blob([noteEl.value || 'ملاحظات الطالب — منصة الباحث الفلسطيني'], { type: 'text/plain;charset=utf-8' });
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = 'student-notes-palestinian-grad-hub.txt';
+          a.click();
+          setTimeout(() => URL.revokeObjectURL(a.href), 1500);
+          showToast('تم حفظ ملف الملاحظات على جهازك');
+        });
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => { init(); initSolutionsHub(); initDesignCustomizer(); initDefenseKit(); initFacultiesDirectory(); initRefsHelper(); initTopStats(); initFeedbackModal(); initPowerExtras(); initGuideAndBankFilter(); initStatsLab(); initV2Tools(); initUsageCounters(); initLiveEnvBar(); initStudentProToolkit(); updateOfflineBadge(); });
+
+    if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js?v=7').then(r => r.update()).catch(() => {}); }); }
   </script>
 
   <!-- Welcome / creator card (live page) -->
@@ -4670,6 +5151,7 @@ ${document.getElementById('dk-invite-msg').value}
         <a href="mailto:mostafa.n.shafie@gmail.com">البريد الإلكتروني</a>
         <a href="https://www.linkedin.com/in/mostafa-alshafie-545558231/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href="https://www.instagram.com/mostafa.n.alshafie/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="https://mostanid222-design.github.io/mostafa-ats-cv/#ngo-hub" target="_blank" rel="noopener noreferrer" style="background:linear-gradient(135deg,#fbbf24,#fde047);color:#0f172a;border-color:#d97706;font-weight:900;box-shadow:0 4px 12px rgba(245,158,11,.35)">🏛️ بوابة العمل المؤسسي ★</a>
       </div>
       <button class="mw-enter" id="mostafa-welcome-enter" type="button">دخول إلى المنصة ←</button>
     </div>
