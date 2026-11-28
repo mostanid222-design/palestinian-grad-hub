@@ -1,5 +1,5 @@
-const CACHE_NAME = 'pal-grad-hub-v7';
-const ASSETS = ['./', './index.html', './manifest.json'];
+const CACHE_NAME = 'pal-grad-hub-v8';
+const ASSETS = ['./', './index.html', './ngo.html', './manifest.json'];
 
 self.addEventListener('install', event => {
   event.waitUntil(
@@ -26,6 +26,6 @@ self.addEventListener('fetch', event => {
         caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone)).catch(() => {});
       }
       return resp;
-    }).catch(() => caches.match(event.request).then(cached => cached || caches.match('./index.html')))
+    }).catch(() => caches.match(event.request).then(cached => cached || caches.match('./index.html', './ngo.html')))
   );
 });
