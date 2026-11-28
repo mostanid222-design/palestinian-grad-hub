@@ -1,0 +1,3 @@
+انسخ هذا السطر والصقه داخل index.html في منصة السيرة الذاتية ومنصة الباحث بعد رفع ملف ngo.html بجانبهما:
+
+<a href="ngo.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:10px;background:#0f766e;color:#fff;font-weight:800;font-size:13px;text-decoration:none;">🏛 بوابة العمل المؤسسي ↗</a>
